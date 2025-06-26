@@ -8,13 +8,13 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+  <!-- Leaflet CSS -->
+  <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet" />
   <style>
     html { scroll-behavior: smooth; }
     body { font-family: Arial, sans-serif; color: #333; background: #fff; }
     h2, h3, h4 { color: #4293ff; }
     a:hover { color: #4293ff; }
-    .btn-primary { background: #4293ff; color: #fff; padding: 0.5rem 1.5rem; border-radius: 9999px; transition: opacity 0.3s; }
-    .btn-primary:hover { opacity: 0.8; }
     .fade-in { opacity: 0; transform: translateY(1rem); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
     .image-holder { overflow: hidden; border-radius: 0.75rem; transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s; }
@@ -22,6 +22,8 @@
     .image-holder:hover { transform: scale(1.05); border: 2px solid #ff3131; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
     .image-holder:hover img { transform: scale(1.1); }
   </style>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body class="bg-white text-gray-800">
 
@@ -42,12 +44,12 @@
       </button>
     </div>
     <div id="mobile-links" class="hidden flex-col bg-white border-t p-4 space-y-2 text-center md:hidden">
-      <a href="#about" class="hover:text-blue-600 block">About</a>
-      <a href="#services" class="hover:text-blue-600 block">Services</a>
-      <a href="#clients" class="hover:text-blue-600 block">Clients</a>
-      <a href="#projects" class="hover:text-blue-600 block">Projects</a>
-      <a href="#map" class="hover:text-blue-600 block">Locations</a>
-      <a href="#contact" class="hover:text-blue-600 block">Contact</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#clients">Clients</a>
+      <a href="#projects">Projects</a>
+      <a href="#map">Locations</a>
+      <a href="#contact">Contact</a>
     </div>
   </nav>
 
@@ -67,7 +69,6 @@
     <p>
       From residential and commercial buildings to large-scale public and industrial projects, we bring decades of combined expertise to every project. Our experienced teams leverage modern technology and best-in-class practices to ensure safety, sustainability, and superior craftsmanship at every stage of construction.
     </p>
-
     <!-- VISION & MISSION -->
     <div class="grid md:grid-cols-2 gap-8 mt-8 text-left">
       <div class="bg-white p-6 rounded-xl shadow image-holder">
@@ -79,7 +80,6 @@
         <p>To provide innovative, reliable, and efficient contracting services while upholding the highest standards of safety, quality, and integrity on every project.</p>
       </div>
     </div>
-
     <!-- CORE VALUES -->
     <div class="mt-12">
       <h3 class="text-2xl font-bold mb-6 text-center">Core Values</h3>
@@ -103,6 +103,11 @@
           <i class="fa fa-hard-hat text-4xl text-[#4293ff] mb-4"></i>
           <h4 class="font-semibold mb-2">Safety</h4>
           <p>Prioritizing the well-being of our team and everyone on site.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow image-holder">
+          <i class="fa fa-leaf text-4xl text-[#4293ff] mb-4"></i>
+          <h4 class="font-semibold mb-2">Sustainability</h4>
+          <p>Minimizing our environmental footprint and building responsibly for future generations.</p>
         </div>
       </div>
     </div>
@@ -159,7 +164,7 @@
       <div class="bg-white p-6 rounded-xl shadow image-holder">
         <img src="https://via.placeholder.com/600x400" class="w-full rounded mb-4" alt="Police Station Building" />
         <h3 class="text-xl font-semibold">Police Station Building – Ratnagiri</h3>
-        <p>G+2 Storied | Eagle Infra Infra Ltd. | Approx ₹1.29 Crores | Under Construction</p>
+        <p>G+2 Storied | Eagle Infra Ltd. | Approx ₹1.29 Crores | Under Construction</p>
       </div>
     </div>
   </section>
@@ -167,9 +172,7 @@
   <!-- MAP -->
   <section id="map" class="py-16 bg-white fade-in text-center">
     <h2 class="text-3xl font-bold mb-6">Our Project Locations</h2>
-    <div class="h-64 bg-gray-100 border border-dashed flex items-center justify-center text-gray-500 mx-auto w-full max-w-5xl">
-      Map will go here
-    </div>
+    <div id="map-container" class="mx-auto w-full max-w-5xl" style="height:400px;"></div>
   </section>
 
   <!-- CONTACT -->
@@ -187,7 +190,7 @@
   </footer>
 
   <!-- SCRIPTS -->
-  <script>
+   <script>
     document.getElementById('mobile-menu-btn').addEventListener('click', () => {
       document.getElementById('mobile-links').classList.toggle('hidden');
     });
@@ -202,6 +205,46 @@
       });
     }, { threshold: 0.1 });
     faders.forEach(fader => appearOnScroll.observe(fader));
+
+    // Leaflet Map
+    const map = L.map('map-container').setView([19.076, 72.8777], 5);
+    L.tileLayer(
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }
+    ).addTo(map);
+
+    // === PROJECT MARKERS ===
+    L.marker([19.0538, 73.10303]).addTo(map).bindPopup('<strong>RIDDHI SIDDHI APARTMENTS</strong><br>STILT + 4 STORIED RESIDENTIAL BUILDING<br>Client: M/S. SHREE SIDDHIVINAYAK ENTERPRISES<br>COMPLETED');
+    L.marker([18.9907, 73.117]).addTo(map).bindPopup('<strong>RIDDHI SIDDHI COMPLEX</strong><br>STILT + 4 STORIED - 9 WINGS RESIDENTIAL BUILDINGS<br>Client: M/S. SHREE SIDDHIVINAYAK ENTERPRISES<br>COMPLETED');
+    L.marker([18.9907, 73.117]).addTo(map).bindPopup('<strong>GLOBAL PARADISE</strong><br>STILT +7 RESIDENTIAL BUILDING<br>Client: M/S. GLOBAL ENTERPRISES<br>COMPLETED');
+    L.marker([19, 73.1]).addTo(map).bindPopup('<strong>VINAYAK COMPLEX</strong><br>GROUND + 2 STORIED RESIDENTIAL BUILDING<br>Client: M/S. GLOBAL ENTERPRISES<br>COMPLETED');
+    L.marker([16.9938, 73.3143]).addTo(map).bindPopup('<strong>RESIDENTIAL BUILDING</strong><br>GROUND + 4 STORIED RESIDENTIAL BUILDING<br>Client: M/S. SHREE SIDDHIVINAYAK ENTERPRISES<br>COMPLETED');
+    L.marker([19.27, 73.065353]).addTo(map).bindPopup('<strong>UNDERGROUND WATER TANK</strong><br>UNDER GROUND WATER TANK / PUMP ROOM & OTHER MISCELLANEOUS WORKS AT D-MART.<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
+    L.marker([19.053846, 73.10303]).addTo(map).bindPopup('<strong>SAI RAJ PARADISE</strong><br>STILT + 7 STORIED - 2 WINGS RESIDENTIAL BUILDINGS<br>Client: M/S SAI RAJ ENTERPRISES<br>COMPLETED');
+    L.marker([26.8467, 80.9462]).addTo(map).bindPopup('<strong>B-GREEN TERRACE</strong><br>GROUND + 3 STORIED RESIDENTIAL BUILDING<br>Client: M/S. B - GREEN PVT. LTD.<br>COMPLETED');
+    L.marker([19.4698, 72.8228]).addTo(map).bindPopup('<strong>BUNGALOW</strong><br>G+1 STORIED BUNGLOW<br>Client: MR. SANDEEP MEHTA, KANDIVALI (EAST), MUMBAI, MAHARAHSTRA.<br>COMPLETED');
+    L.marker([18.9, 73.2]).addTo(map).bindPopup('<strong>RESIDENTIAL BUILDING</strong><br>SHREE SWAMI SAMARTH DEVELOPERS, GROUND + 1 STORIED RESIDENTIAL BUILDING<br>Client: M/S KHALIDKAR & KADAM, KARJAT, DIST. RAIGAD, MAHARASHTRA.<br>COMPLETED');
+    L.marker([18.9766, 73.2906]).addTo(map).bindPopup('<strong>SUNRISE RESIDENCY</strong><br>GROUND + 3 STORIED, 30 RESIDENTIAL BUILDINGS<br>Client: M/S. RAJNIR ENTERPRISES PVT. LTD.<br>COMPLETED');
+    L.marker([22.7196, 75.858]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
+    L.marker([22.336, 73.2135]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
+    L.marker([19.033, 73.0289]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
+    L.marker([23.2599, 77.4126]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
+    L.marker([12.834, 77.6972]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
+    L.marker([12.8714, 74.8559]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
+    L.marker([22.3072, 73.1812]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
+    L.marker([17.385, 78.4867]).addTo(map).bindPopup('<strong>RESIDENTIAL BUILDING</strong><br>GROUND + 6 UPPER STORIED RESIDENTIAL BUILDING<br>Client: MR. SALIM SHAIKH, HYDERABAD, TELANGANA.<br>COMPLETED');
+    L.marker([17.53, 73.512]).addTo(map).bindPopup('<strong>TOLL PLAZA BUILDING</strong><br>G+2 UPPER STORIED TOLL PLAZA BUILDING<br>Client: EAGLE INFRA INDIA LTD.<br>COMPLETED');
+    L.marker([17.53, 73.512]).addTo(map).bindPopup('<strong>MISSCELLANEOUS STRUCTURES</strong><br>TOILET BLOCKS, MEDICAL & TRAFFIC AID POSTS, CHUTE DRAINS ETC. AT CHIPLUN, ALONG MUMBAI GOA HIGHWAY.<br>Client: EAGLE INFRA INDIA LTD.<br>COMPLETED');
+    L.marker([16.9885, 73.4661]).addTo(map).bindPopup('<strong>FOUNDATIONS</strong><br>FOUNDATIONS FOR COMPANY BASE CAMP<br>Client: INDERDEEP CONSTRUCTION COMPANY LTD.<br>COMPLETED');
+    L.marker([16.9885, 73.4665]).addTo(map).bindPopup('<strong>TOILET BLOCK</strong><br>TOILET BLOCK FOR COMPANY BASE CAMP<br>Client: INDERDEEP CONSTRUCTION COMPANY LTD.<br>COMPLETED');
+    L.marker([19.0368, 73.0158]).addTo(map).bindPopup('<strong>ELECTRIC BUS CHARGING STATION</strong><br>ELECTRIC BUS CHARGING STATION FOR 4 BUSES<br>Client: INDERDEEP CONSTRUCTION COMPANY LTD.<br>COMPLETED');
+    L.marker([19.139, 73.0619]).addTo(map).bindPopup('<strong>ELECTRIC BUS CHARGING STATION</strong><br>ELECTRIC BUS CHARGING STATIONS FOR 6 BUSES<br>Client: INDERDEEP CONSTRUCTION COMPANY LTD.<br>COMPLETED');
+    L.marker([17.385, 78.4867]).addTo(map).bindPopup('<strong>RESIDENTIAL BUILDING</strong><br>GROUND + 6 STORIED RESIDENTIAL BUILDING<br>Client: MR. UMAR SHAIKH, HYDERABAD, TELANGANA, INDIA.<br>UNDER CONSTRUCTION');
+    L.marker([17.53, 73.512]).addTo(map).bindPopup('<strong>BUS STOPS</strong><br>MULTIPLE BUS STOPS AT CHIPLUN, ALONG MUMBAI GOA HIGHWAY<br>Client: EAGLE INFRA INDIA LTD.<br>UNDER CONSTRUCTION');
+    L.marker([17.53, 73.512]).addTo(map).bindPopup('<strong>BUS STOPS</strong><br>MULTIPLE BUS STOPS AT RATNAGIRI, ALONG MUMBAI GOA HIGHWAY<br>Client: INDERDEEP CONSTRUCTION COMPANY LTD.<br>UNDER CONSTRUCTION');
+    L.marker([17.4042, 73.5379]).addTo(map).bindPopup('<strong>POLICE STATION BUILDING</strong><br>G+1 UPPER STORIED POLICE STATION BUILDING<br>Client: EAGLE INFRA INDIA LTD.<br>IN-HAND');
+    L.marker([17.4042, 73.5379]).addTo(map).bindPopup('<strong>TALATHI OFFICE BUILDING</strong><br>SINGLE STORIED TALATHI OFFICE BUILDING<br>Client: EAGLE INFRA INDIA LTD.<br>IN-HAND');
+    L.marker([18.98, 73.116]).addTo(map).bindPopup('<strong>ELECTRIC BUS CHARGING STATION</strong><br>ELECTRIC BUS CHARGING STATIONS FOR APPROX. 40 BUSES<br>Client: INDERDEEP CONSTRUCTION COMPANY LTD.<br>IN-HAND');
   </script>
 </body>
 </html>
