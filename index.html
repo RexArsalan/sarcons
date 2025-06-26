@@ -4,94 +4,195 @@
   <meta charset="UTF-8" />
   <title>Sarcons Engineers & Contractors</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <!-- Tailwind CDN -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
   <style>
-    body { font-family: 'Poppins', sans-serif; }
-    .fade-in { opacity: 0; transform: translateY(1rem); transition: all 0.8s ease-out; }
+    html { scroll-behavior: smooth; }
+    body { font-family: Arial, sans-serif; color: #333; background: #fff; }
+    h2, h3, h4 { color: #4293ff; }
+    a:hover { color: #4293ff; }
+    .btn-primary { background: #4293ff; color: #fff; padding: 0.5rem 1.5rem; border-radius: 9999px; transition: opacity 0.3s; }
+    .btn-primary:hover { opacity: 0.8; }
+    .fade-in { opacity: 0; transform: translateY(1rem); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .image-holder { overflow: hidden; border-radius: 0.75rem; transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s; }
+    .image-holder img { transition: transform 0.3s ease; }
+    .image-holder:hover { transform: scale(1.05); border: 2px solid #ff3131; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+    .image-holder:hover img { transform: scale(1.1); }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-white text-gray-800">
+
+  <!-- NAVBAR -->
+  <nav class="fixed w-full top-0 left-0 bg-white shadow z-50">
+    <div class="max-w-6xl mx-auto flex justify-between items-center px-4 py-3">
+      <img src="./cropped_cons.png" alt="Sarcons Logo" class="h-10" />
+      <div class="space-x-6 text-gray-700 hidden md:flex">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#clients">Clients</a>
+        <a href="#projects">Projects</a>
+        <a href="#map">Locations</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button id="mobile-menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+        <i class="fa fa-bars text-2xl"></i>
+      </button>
+    </div>
+    <div id="mobile-links" class="hidden flex-col bg-white border-t p-4 space-y-2 text-center md:hidden">
+      <a href="#about" class="hover:text-blue-600 block">About</a>
+      <a href="#services" class="hover:text-blue-600 block">Services</a>
+      <a href="#clients" class="hover:text-blue-600 block">Clients</a>
+      <a href="#projects" class="hover:text-blue-600 block">Projects</a>
+      <a href="#map" class="hover:text-blue-600 block">Locations</a>
+      <a href="#contact" class="hover:text-blue-600 block">Contact</a>
+    </div>
+  </nav>
 
   <!-- HERO -->
-  <section class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-blue-900 to-blue-700 text-white p-6 text-center">
-    <h1 class="text-5xl font-bold mb-4 fade-in">Sarcons</h1>
-    <p class="text-xl mb-6 fade-in">Engineers & Contractors</p>
-    <a href="#contact" class="bg-white text-blue-800 px-6 py-3 rounded-full font-semibold hover:scale-105 transition fade-in">Get in Touch</a>
+  <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-24 bg-white">
+    <img src="./cropped_cons.png" alt="Sarcons Logo" class="h-24 mb-4 fade-in" />
+    <h1 class="text-5xl font-bold mb-2 fade-in text-[#4293ff]">Sarcons Engineers & Contractors</h1>
+    <p class="text-xl fade-in text-gray-700">Building Trust. Delivering Excellence.</p>
   </section>
 
   <!-- ABOUT -->
-  <section class="py-16 px-4 max-w-4xl mx-auto text-center space-y-8 fade-in">
+  <section id="about" class="py-16 px-4 max-w-5xl mx-auto text-center space-y-8 fade-in">
     <h2 class="text-3xl font-bold">About Us</h2>
-    <p class="text-lg">Established in 2009, Sarcons is a premier construction contracting firm with a strong presence across India, delivering high-quality projects on time and within budget.</p>
-    <h3 class="text-xl font-semibold">Vision</h3>
-    <p>To be a trusted leader in the construction industry, known for delivering excellence and sustainable solutions.</p>
-    <h3 class="text-xl font-semibold">Mission</h3>
-    <p>To provide innovative, reliable, and efficient services, ensuring the highest standards of quality and client satisfaction.</p>
-    <h3 class="text-xl font-semibold">Core Values</h3>
-    <ul class="space-y-1 list-disc list-inside text-left mx-auto max-w-md">
-      <li>Quality</li>
-      <li>Integrity</li>
-      <li>Reliability</li>
-    </ul>
-  </section>
+    <p>
+      Established in 2009, <strong>Sarcons Engineers &amp; Contractors</strong> is a premier, multidisciplinary construction contracting firm with a strong footprint across India. Under the visionary leadership of Mr. Abdul Rahman Shaikh, we have built a reputation for delivering high-quality, cost-effective solutions that stand the test of time.
+    </p>
+    <p>
+      From residential and commercial buildings to large-scale public and industrial projects, we bring decades of combined expertise to every project. Our experienced teams leverage modern technology and best-in-class practices to ensure safety, sustainability, and superior craftsmanship at every stage of construction.
+    </p>
 
-  <!-- SERVICES -->
-  <section class="py-16 bg-white fade-in">
-    <div class="max-w-5xl mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8">Our Services</h2>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-xl transition">Residential Building Construction</div>
-        <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-xl transition">Commercial Building Construction</div>
-        <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-xl transition">Infrastructure Building Construction</div>
-        <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-xl transition">Industrial Structures Construction</div>
-        <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-xl transition">Public Building Construction</div>
-        <div class="bg-gray-100 p-6 rounded-xl shadow hover:shadow-xl transition">Miscellaneous Structures Construction</div>
+    <!-- VISION & MISSION -->
+    <div class="grid md:grid-cols-2 gap-8 mt-8 text-left">
+      <div class="bg-white p-6 rounded-xl shadow image-holder">
+        <h3 class="text-xl font-semibold mb-2">Vision</h3>
+        <p>To be a trusted leader in construction, delivering excellence, sustainability, and lasting value to every client and community we serve.</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow image-holder">
+        <h3 class="text-xl font-semibold mb-2">Mission</h3>
+        <p>To provide innovative, reliable, and efficient contracting services while upholding the highest standards of safety, quality, and integrity on every project.</p>
+      </div>
+    </div>
+
+    <!-- CORE VALUES -->
+    <div class="mt-12">
+      <h3 class="text-2xl font-bold mb-6 text-center">Core Values</h3>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
+        <div class="bg-white p-6 rounded-xl shadow image-holder">
+          <i class="fa fa-check-circle text-4xl text-[#4293ff] mb-4"></i>
+          <h4 class="font-semibold mb-2">Quality</h4>
+          <p>Commitment to delivering excellence in every detail.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow image-holder">
+          <i class="fa fa-handshake text-4xl text-[#4293ff] mb-4"></i>
+          <h4 class="font-semibold mb-2">Integrity</h4>
+          <p>Transparent communication and ethical business practices.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow image-holder">
+          <i class="fa fa-clock text-4xl text-[#4293ff] mb-4"></i>
+          <h4 class="font-semibold mb-2">Reliability</h4>
+          <p>Completing projects on-time and within budget.</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow image-holder">
+          <i class="fa fa-hard-hat text-4xl text-[#4293ff] mb-4"></i>
+          <h4 class="font-semibold mb-2">Safety</h4>
+          <p>Prioritizing the well-being of our team and everyone on site.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
-  <section class="py-16 px-4 max-w-5xl mx-auto fade-in">
-    <h2 class="text-3xl font-bold text-center mb-8">Key Recent Projects</h2>
-    <div class="space-y-6">
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-        <h3 class="text-xl font-semibold">Residential Building — Hyderabad, Telangana</h3>
-        <p>G+6 Storied | Client: Mr. Umar Shaikh | Approx Cost: ₹8 Crores</p>
+  <!-- SERVICES -->
+  <section id="services" class="py-16 bg-gray-50 fade-in">
+    <h2 class="text-3xl font-bold text-center mb-8">Our Services</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4 text-center">
+      <div class="bg-white p-4 rounded-xl shadow image-holder">
+        <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Residential Building" />
+        <h4 class="font-semibold">Residential Buildings</h4>
       </div>
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
-        <h3 class="text-xl font-semibold">Toll Plaza Building — Khershet, Ratnagiri</h3>
-        <p>G+2 Storied | Client: Eagle Infra India Ltd. | Approx Cost: ₹44.50 Lakhs</p>
+      <div class="bg-white p-4 rounded-xl shadow image-holder">
+        <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Commercial Building" />
+        <h4 class="font-semibold">Commercial Buildings</h4>
+      </div>
+      <div class="bg-white p-4 rounded-xl shadow image-holder">
+        <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Public Buildings" />
+        <h4 class="font-semibold">Public Buildings</h4>
+      </div>
+      <div class="bg-white p-4 rounded-xl shadow image-holder">
+        <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Miscellaneous Structures" />
+        <h4 class="font-semibold">Miscellaneous Civil Works</h4>
       </div>
     </div>
   </section>
 
   <!-- CLIENTS -->
-  <section class="py-16 bg-white fade-in">
+  <section id="clients" class="py-16 bg-white fade-in">
     <h2 class="text-3xl font-bold text-center mb-8">Key Clients</h2>
-    <div class="flex flex-wrap justify-center gap-6 text-lg">
-      <span class="bg-gray-100 px-4 py-2 rounded-full shadow">Eagle Infra India Ltd.</span>
-      <span class="bg-gray-100 px-4 py-2 rounded-full shadow">Inderdeep Construction Co.</span>
-      <span class="bg-gray-100 px-4 py-2 rounded-full shadow">Aeroeagle Automobiles Ltd.</span>
-      <span class="bg-gray-100 px-4 py-2 rounded-full shadow">Avenue Supermarts Ltd.</span>
+    <div class="flex flex-wrap justify-center gap-8 text-lg">
+      <span class="bg-gray-50 px-4 py-2 rounded-xl shadow">Eagle Infra India Ltd.</span>
+      <span class="bg-gray-50 px-4 py-2 rounded-xl shadow">Inderdeep Construction Co. Ltd.</span>
+      <span class="bg-gray-50 px-4 py-2 rounded-xl shadow">Aeroeagle Automobiles Ltd.</span>
+      <span class="bg-gray-50 px-4 py-2 rounded-xl shadow">Avenue Supermarts Ltd.</span>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="py-16 px-4 max-w-6xl mx-auto fade-in">
+    <h2 class="text-3xl font-bold text-center mb-8">Key Recent Projects</h2>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-white p-6 rounded-xl shadow image-holder">
+        <img src="https://via.placeholder.com/600x400" class="w-full rounded mb-4" alt="Residential Project" />
+        <h3 class="text-xl font-semibold">Residential Building – Hyderabad</h3>
+        <p>G+6 Storied | Mr. Umar Shaikh | Approx ₹8 Crores | Under Construction</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow image-holder">
+        <img src="https://via.placeholder.com/600x400" class="w-full rounded mb-4" alt="Toll Plaza Building" />
+        <h3 class="text-xl font-semibold">Toll Plaza Building – Ratnagiri</h3>
+        <p>G+2 Storied | Eagle Infra India Ltd. | Approx ₹44.50 Lakhs | Completed</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow image-holder">
+        <img src="https://via.placeholder.com/600x400" class="w-full rounded mb-4" alt="Police Station Building" />
+        <h3 class="text-xl font-semibold">Police Station Building – Ratnagiri</h3>
+        <p>G+2 Storied | Eagle Infra Infra Ltd. | Approx ₹1.29 Crores | Under Construction</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section id="map" class="py-16 bg-white fade-in text-center">
+    <h2 class="text-3xl font-bold mb-6">Our Project Locations</h2>
+    <div class="h-64 bg-gray-100 border border-dashed flex items-center justify-center text-gray-500 mx-auto w-full max-w-5xl">
+      Map will go here
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="py-16 text-center bg-blue-50 fade-in">
+  <section id="contact" class="py-16 bg-blue-50 fade-in text-center">
     <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
-    <p>Contact Person: Mr. Abdul Rahman Shaikh</p>
-    <p>Email: <a href="mailto:sarcons2013@gmail.com" class="text-blue-600 underline">sarcons2013@gmail.com</a></p>
-    <p>Phone: +91 9867303633</p>
+    <p><i class="fa fa-user mr-2"></i> Mr. Abdul Rahman Shaikh</p>
+    <p><i class="fa fa-envelope mr-2"></i> <a href="mailto:sarcons2013@gmail.com" class="text-blue-600 underline">sarcons2013@gmail.com</a></p>
+    <p><i class="fa fa-phone mr-2"></i> +91 9867303633</p>
   </section>
 
-  <!-- SCRIPT to reveal sections on scroll -->
+  <!-- FOOTER -->
+  <footer class="bg-gray-900 text-white py-6 text-center fade-in">
+    <img src="./cropped_cons.png" alt="Sarcons Logo" class="h-12 mx-auto mb-2" />
+    <p>&copy; 2025 Sarcons Engineers & Contractors. All rights reserved.</p>
+  </footer>
+
+  <!-- SCRIPTS -->
   <script>
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-links').classList.toggle('hidden');
+    });
+
     const faders = document.querySelectorAll('.fade-in');
-    const appearOptions = { threshold: 0.2 };
     const appearOnScroll = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -99,8 +200,8 @@
           obs.unobserve(entry.target);
         }
       });
-    }, appearOptions);
-    faders.forEach(fader => { appearOnScroll.observe(fader); });
+    }, { threshold: 0.1 });
+    faders.forEach(fader => appearOnScroll.observe(fader));
   </script>
 </body>
 </html>
