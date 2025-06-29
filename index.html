@@ -8,7 +8,6 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
   <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <!-- Swiper.js CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <style>
@@ -29,18 +28,16 @@
 
 <!-- NAVBAR -->
 <nav class="fixed w-full top-0 left-0 bg-white shadow z-50">
-  <div class="max-w-6xl mx-auto flex justify-between items-center px-4 py-3">
-    <img src="https://uploads.onecompiler.io/43p797x9z/43p6tp6aq/sarconslogo.png" alt="Sarcons Logo" class="h-10" />
-    <div class="space-x-6 text-gray-700 hidden md:flex">
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#clients">Clients</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
+  <div class="w-full flex justify-between items-center px-6 lg:px-16 py-4 max-w-[1400px] mx-auto">
+    <a href="#"><img src="https://uploads.onecompiler.io/43p797x9z/43p6tp6aq/sarconslogo.png" alt="Sarcons Logo" class="h-10" /></a>
+    <div class="space-x-8 text-gray-700 hidden md:flex text-sm lg:text-base">
+      <a href="#about" class="hover:text-[#4293ff]">About</a>
+      <a href="#services" class="hover:text-[#4293ff]">Services</a>
+      <a href="#clients" class="hover:text-[#4293ff]">Clients</a>
+      <a href="#projects" class="hover:text-[#4293ff]">Projects</a>
+      <a href="#contact" class="hover:text-[#4293ff]">Contact</a>
     </div>
-    <button id="mobile-menu-btn" class="md:hidden text-gray-700 focus:outline-none">
-      <i class="fa fa-bars text-2xl"></i>
-    </button>
+    <button id="mobile-menu-btn" class="md:hidden text-gray-700"><i class="fa fa-bars text-2xl"></i></button>
   </div>
   <div id="mobile-links" class="hidden md:hidden flex-col bg-white border-t p-4 text-center space-y-2">
     <a href="#about">About</a>
@@ -52,12 +49,12 @@
 </nav>
 
 <!-- HERO -->
-<section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-18 bg-gradient-to-b from-white to-blue-50">
+<section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-32 bg-gradient-to-b from-white to-blue-50">
   <img src="https://uploads.onecompiler.io/43p797x9z/43p6tp6aq/head.png" alt="Sarcons Logo" class="h-48 mb-4 fade-in" />
   <p class="text-xl fade-in text-gray-700">Building Trust. Delivering Excellence.</p>
 </section>
 
-
+<!-- REST OF THE SECTIONS... -->
 <!-- ABOUT -->
 <section id="about" class="py-16 px-4 max-w-5xl mx-auto fade-in text-justify">
   <h2 class="text-3xl font-bold text-center mb-8">About Us</h2>
@@ -103,6 +100,7 @@
     </div>
   </div>
 </section>
+
 <!-- SERVICES -->
 <section id="services" class="py-16 bg-gray-50 fade-in">
   <h2 class="text-3xl font-bold text-center mb-8">Our Services</h2>
@@ -110,10 +108,6 @@
     <div class="bg-white p-4 rounded-xl shadow image-holder">
       <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Residential Building" />
       <h4 class="font-semibold">Residential Buildings</h4>
-    </div>
-    <div class="bg-white p-4 rounded-xl shadow image-holder">
-      <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Commercial Building" />
-      <h4 class="font-semibold">Commercial Buildings</h4>
     </div>
     <div class="bg-white p-4 rounded-xl shadow image-holder">
       <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Public Buildings" />
@@ -253,19 +247,36 @@
 </footer>
 
 
+<!-- MAP SECTION -->
+<section id="map" class="py-16 bg-white fade-in text-center relative">
+  <h2 class="text-3xl font-bold mb-6">Our Projects</h2>
+  <div id="map-container" class="mx-auto w-full max-w-5xl rounded-xl shadow" style="height: 400px;"></div>
+</section>
+
+<!-- SIDEBAR FOR PROJECT DETAILS -->
+<div id="project-sidebar" class="fixed top-0 right-0 w-80 h-full bg-white shadow-lg z-[999] transform translate-x-full transition-transform duration-300 overflow-y-auto p-6">
+  <button onclick="closeSidebar()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-xl">&times;</button>
+  <h3 id="sidebar-title" class="text-xl font-bold mb-2 text-[#4293ff]">Project Title</h3>
+  <p id="sidebar-client" class="text-sm mb-2 text-gray-700">Client: ...</p>
+  <p id="sidebar-status" class="text-sm mb-4 text-gray-600">Status: ...</p>
+  <p id="sidebar-details" class="text-sm text-gray-600 leading-relaxed"></p>
+  <div id="sidebar-gallery" class="mt-4"></div>
+</div>
+
 <!-- BACK TO TOP/DOWN BUTTON -->
 <button id="scroll-btn" class="fixed bottom-4 right-4 bg-[#4293ff] text-white px-3 py-2 rounded-full shadow-lg hover:bg-[#317ad4]">
   <span id="scroll-icon">↓</span>
 </button>
 
 <!-- SCRIPT SECTION -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   // Mobile menu toggle
   document.getElementById('mobile-menu-btn').addEventListener('click', () => {
     document.getElementById('mobile-links').classList.toggle('hidden');
   });
 
-  // Fade-in animation on scroll
+  // Fade-in effect
   const faders = document.querySelectorAll('.fade-in');
   const appearOnScroll = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
@@ -277,23 +288,18 @@
   }, { threshold: 0.1 });
   faders.forEach(fader => appearOnScroll.observe(fader));
 
-  // Toggle scroll direction
+  // Scroll button logic
   const scrollBtn = document.getElementById("scroll-btn");
   const scrollIcon = document.getElementById("scroll-icon");
-
   scrollBtn.addEventListener("click", () => {
-    if (window.scrollY > 100) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-    }
+    const target = window.scrollY > 100 ? 0 : document.body.scrollHeight;
+    window.scrollTo({ top: target, behavior: "smooth" });
   });
-
   window.addEventListener("scroll", () => {
     scrollIcon.textContent = window.scrollY > 100 ? "↑" : "↓";
   });
 
-  // Require either mobile or email
+  // Form validation
   document.getElementById("contact-form").addEventListener("submit", function (e) {
     const mobile = document.getElementById("mobile").value.trim();
     const email = document.getElementById("email").value.trim();
@@ -303,7 +309,30 @@
     }
   });
 
-  // Leaflet Map Initialization
+  // Swiper initialization
+  document.addEventListener("DOMContentLoaded", () => {
+    new Swiper(".mySwiper", {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next-custom",
+        prevEl: ".swiper-button-prev-custom",
+      },
+      spaceBetween: 20,
+      grabCursor: true,
+      slidesPerView: 1,
+      breakpoints: {
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 }
+      }
+    });
+  });
+
+  // Leaflet Map setup
   const map = L.map('map-container').setView([19.076, 72.8777], 5);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
@@ -317,7 +346,7 @@
       short: 'G+2 storied toll plaza building',
       client: 'Eagle Infra India Ltd.',
       status: 'Completed',
-      fullDetails: 'G+2 storied toll plaza building constructed along Mumbai-Goa Highway at Ratnagiri.',
+      fullDetails: 'Constructed along Mumbai-Goa Highway at Ratnagiri.',
       folder: 'toll-plaza'
     },
     {
@@ -326,7 +355,7 @@
       short: '6-storey residential tower',
       client: 'Mr. Umar Shaikh',
       status: 'Under Construction',
-      fullDetails: 'G+6 storied high-end residential apartment in Hyderabad worth approx ₹8 crores.',
+      fullDetails: 'G+6 high-end apartment worth ₹8 crores.',
       folder: 'hyderabad-us'
     }
   ];
@@ -336,23 +365,19 @@
     document.getElementById("sidebar-client").innerText = `Client: ${project.client}`;
     document.getElementById("sidebar-status").innerText = `Status: ${project.status}`;
     document.getElementById("sidebar-details").innerText = project.fullDetails;
-
-    const galleryContainer = document.getElementById('sidebar-gallery');
-    galleryContainer.innerHTML = '';
-
-    const gridWrapper = document.createElement('div');
-    gridWrapper.className = 'grid grid-cols-2 gap-4 mt-4';
-
+    const gallery = document.getElementById("sidebar-gallery");
+    gallery.innerHTML = '';
+    const grid = document.createElement('div');
+    grid.className = 'grid grid-cols-2 gap-4';
     for (let i = 1; i <= 6; i++) {
       const img = document.createElement('img');
       img.src = `./projects/${project.folder}/image${i}.jpg`;
       img.alt = `${project.title} Image ${i}`;
       img.className = 'w-full rounded shadow';
-      img.onerror = () => img.remove(); // Skip missing images
-      gridWrapper.appendChild(img);
+      img.onerror = () => img.remove();
+      grid.appendChild(img);
     }
-
-    galleryContainer.appendChild(gridWrapper);
+    gallery.appendChild(grid);
     document.getElementById("project-sidebar").style.transform = "translateX(0)";
   }
 
@@ -361,50 +386,25 @@
   }
 
   window.closeSidebar = closeSidebar;
-  window.openSidebarData = function(projectStr) {
+  window.openSidebarData = function (projectStr) {
     const project = JSON.parse(projectStr);
     openSidebar(project);
   };
 
-  // Add project markers
   projects.forEach(project => {
-    const imageUrl = `./projects/${project.folder}/image1.jpg`;
-    const popupContent = `
+    const popup = `
       <div style="max-width:250px;">
         <strong>${project.title}</strong><br/>
         ${project.short}<br/>
-        <img src="${imageUrl}" alt="${project.title}" style="width:100%; height:auto; margin-top:8px; border-radius:6px;" onerror="this.style.display='none';" />
+        <img src="./projects/${project.folder}/image1.jpg" alt="${project.title}" style="width:100%; border-radius:6px; margin-top:8px;" onerror="this.style.display='none'" />
         <button onclick='window.openSidebarData(${JSON.stringify(JSON.stringify(project))})'
-          style="margin-top: 6px; background-color: #4293ff; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
+          style="margin-top: 6px; background-color: #4293ff; color: white; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
           More Details
         </button>
-      </div>
-    `;
-    L.marker(project.coords).addTo(map).bindPopup(popupContent);
-  });
-
-  // Swiper (for key recent projects section only)
-  const swiper = new Swiper('.mySwiper', {
-    loop: true,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-      pauseOnMouseEnter: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    grabCursor: true,
-    spaceBetween: 20,
-    slidesPerView: 1,
-    breakpoints: {
-      768: { slidesPerView: 2 },
-      1024: { slidesPerView: 3 }
-    }
+      </div>`;
+    L.marker(project.coords).addTo(map).bindPopup(popup);
   });
 </script>
-
 
 </body>
 </html>
