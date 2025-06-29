@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Sarcons Engineers & Contractors</title>
+  <title>Sarcons</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
@@ -30,7 +30,7 @@
 <!-- NAVBAR -->
 <nav class="fixed w-full top-0 left-0 bg-white shadow z-50">
   <div class="max-w-6xl mx-auto flex justify-between items-center px-4 py-3">
-    <img src="./cropped_cons.png" alt="Sarcons Logo" class="h-10" />
+    <img src="https://uploads.onecompiler.io/43p797x9z/43p6tp6aq/sarconslogo.png" alt="Sarcons Logo" class="h-10" />
     <div class="space-x-6 text-gray-700 hidden md:flex">
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -52,11 +52,11 @@
 </nav>
 
 <!-- HERO -->
-<section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-32 bg-gradient-to-b from-white to-blue-50">
-  <img src="./cropped_cons.png" alt="Sarcons Logo" class="h-24 mb-4 fade-in" />
-  <h1 class="text-5xl font-bold mb-2 fade-in text-[#4293ff]">Sarcons</h1>
+<section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-18 bg-gradient-to-b from-white to-blue-50">
+  <img src="https://uploads.onecompiler.io/43p797x9z/43p6tp6aq/head.png" alt="Sarcons Logo" class="h-48 mb-4 fade-in" />
   <p class="text-xl fade-in text-gray-700">Building Trust. Delivering Excellence.</p>
 </section>
+
 
 <!-- ABOUT -->
 <section id="about" class="py-16 px-4 max-w-5xl mx-auto fade-in text-justify">
@@ -65,7 +65,7 @@
   <p>From residential and retail buildings to public projects, we bring decades of combined expertise to every project. Our experienced teams ensure safety, reliability, and superior craftsmanship at every stage of construction.</p>
 
   <!-- VISION & MISSION -->
-  <div class="grid md:grid-cols-2 gap-8 mt-8 text-left">
+  <div class="grid md:grid-cols-2 gap-8 mt-8 text-center">
     <div class="bg-white p-6 rounded-xl shadow image-holder">
       <h3 class="text-xl font-semibold mb-2">Vision</h3>
       <p>To be a trusted leader in construction, delivering excellence, sustainability, and lasting value to every client and community we serve.</p>
@@ -126,8 +126,7 @@
   </div>
 </section>
 
-<!-- CLIENTS -->
-<!-- CLIENTS -->
+
 <!-- CLIENTS -->
 <section id="clients" class="py-16 bg-white fade-in">
   <h2 class="text-3xl font-bold text-center mb-8">Key Clients</h2>
@@ -142,7 +141,7 @@
     <!-- Client 2 -->
     <div class="bg-gray-50 p-4 rounded-xl shadow hover:shadow-lg transition group text-center">
       <img src="https://via.placeholder.com/120x60?text=Inderdeep" alt="Inderdeep Construction Co. Ltd." class="h-16 mx-auto mb-2 grayscale group-hover:grayscale-0 transition" />
-      <p class="text-sm font-semibold text-gray-700 group-hover:text-[#4293ff]">Inderdeep Construction Co. Ltd.</p>
+      <p class="text-sm font-semibold text-gray-700 group-hover:text-[#4293ff]">Inderdeep Infra India Ltd.</p>
     </div>
 
     <!-- Client 3 -->
@@ -218,6 +217,11 @@
   <p id="sidebar-client" class="text-sm mb-2 text-gray-700">Client: ...</p>
   <p id="sidebar-status" class="text-sm mb-4 text-gray-600">Status: ...</p>
   <p id="sidebar-details" class="text-sm text-gray-600 leading-relaxed"></p>
+  
+  <!-- Sidebar image gallery -->
+<div id="sidebar-gallery" class="mt-4"></div>
+<p id="sidebar-details" class="text-sm text-gray-600 leading-relaxed"></p>
+
 </div>
 <!-- CONTACT -->
 <section id="contact" class="py-16 bg-blue-50 fade-in text-center">
@@ -244,7 +248,7 @@
 
 <!-- FOOTER -->
 <footer class="bg-gray-900 text-white py-6 text-center fade-in">
-  <img src="./cropped_cons.png" alt="Sarcons Logo" class="h-12 mx-auto mb-2" />
+  <img src="https://uploads.onecompiler.io/43p797x9z/43p6tp6aq/sarconslogo.png" alt="Sarcons Logo" class="h-12 mx-auto mb-2" />
   <p>&copy; 2025 Sarcons. All rights reserved.</p>
 </footer>
 
@@ -286,11 +290,7 @@
   });
 
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 100) {
-      scrollIcon.textContent = "↑";
-    } else {
-      scrollIcon.textContent = "↓";
-    }
+    scrollIcon.textContent = window.scrollY > 100 ? "↑" : "↓";
   });
 
   // Require either mobile or email
@@ -302,16 +302,14 @@
       alert("Please provide at least Mobile Number or Email.");
     }
   });
-</script>
-<script>
-  // Initialize Leaflet Map
+
+  // Leaflet Map Initialization
   const map = L.map('map-container').setView([19.076, 72.8777], 5);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  // Project Data
   const projects = [
     {
       coords: [19.076, 72.8777],
@@ -319,7 +317,8 @@
       short: 'G+2 storied toll plaza building',
       client: 'Eagle Infra India Ltd.',
       status: 'Completed',
-      fullDetails: 'G+2 storied toll plaza building constructed along Mumbai-Goa Highway at Ratnagiri.'
+      fullDetails: 'G+2 storied toll plaza building constructed along Mumbai-Goa Highway at Ratnagiri.',
+      folder: 'toll-plaza'
     },
     {
       coords: [17.385, 78.4867],
@@ -327,50 +326,64 @@
       short: '6-storey residential tower',
       client: 'Mr. Umar Shaikh',
       status: 'Under Construction',
-      fullDetails: 'G+6 storied high-end residential apartment in Hyderabad worth approx ₹8 crores.'
+      fullDetails: 'G+6 storied high-end residential apartment in Hyderabad worth approx ₹8 crores.',
+      folder: 'hyderabad-us'
     }
   ];
 
-  // Function to open sidebar with full details
   function openSidebar(project) {
     document.getElementById("sidebar-title").innerText = project.title;
     document.getElementById("sidebar-client").innerText = `Client: ${project.client}`;
     document.getElementById("sidebar-status").innerText = `Status: ${project.status}`;
     document.getElementById("sidebar-details").innerText = project.fullDetails;
+
+    const galleryContainer = document.getElementById('sidebar-gallery');
+    galleryContainer.innerHTML = '';
+
+    const gridWrapper = document.createElement('div');
+    gridWrapper.className = 'grid grid-cols-2 gap-4 mt-4';
+
+    for (let i = 1; i <= 6; i++) {
+      const img = document.createElement('img');
+      img.src = `./projects/${project.folder}/image${i}.jpg`;
+      img.alt = `${project.title} Image ${i}`;
+      img.className = 'w-full rounded shadow';
+      img.onerror = () => img.remove(); // Skip missing images
+      gridWrapper.appendChild(img);
+    }
+
+    galleryContainer.appendChild(gridWrapper);
     document.getElementById("project-sidebar").style.transform = "translateX(0)";
   }
 
-  // Close sidebar function
   function closeSidebar() {
     document.getElementById("project-sidebar").style.transform = "translateX(100%)";
   }
 
-  // Expose closeSidebar to global scope
   window.closeSidebar = closeSidebar;
-
-  // Add markers with popup and "More Details" button
-  projects.forEach(project => {
-    const popupContent = `
-      <strong>${project.title}</strong><br/>
-      ${project.short}<br/>
-      <button onclick='window.openSidebarData(${JSON.stringify(JSON.stringify(project) )})'
-        style="margin-top: 6px; background-color: #4293ff; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
-        More Details
-      </button>
-    `;
-    L.marker(project.coords).addTo(map)
-      .bindPopup(popupContent);
-  });
-
-  // Helper function to parse JSON from inline string and open sidebar
   window.openSidebarData = function(projectStr) {
     const project = JSON.parse(projectStr);
     openSidebar(project);
-  }
-</script>
-//swiper.JS
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
+  };
+
+  // Add project markers
+  projects.forEach(project => {
+    const imageUrl = `./projects/${project.folder}/image1.jpg`;
+    const popupContent = `
+      <div style="max-width:250px;">
+        <strong>${project.title}</strong><br/>
+        ${project.short}<br/>
+        <img src="${imageUrl}" alt="${project.title}" style="width:100%; height:auto; margin-top:8px; border-radius:6px;" onerror="this.style.display='none';" />
+        <button onclick='window.openSidebarData(${JSON.stringify(JSON.stringify(project))})'
+          style="margin-top: 6px; background-color: #4293ff; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
+          More Details
+        </button>
+      </div>
+    `;
+    L.marker(project.coords).addTo(map).bindPopup(popupContent);
+  });
+
+  // Swiper (for key recent projects section only)
   const swiper = new Swiper('.mySwiper', {
     loop: true,
     autoplay: {
@@ -390,9 +403,6 @@
       1024: { slidesPerView: 3 }
     }
   });
-</script>
-
-
 </script>
 
 
