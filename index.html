@@ -6,9 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
   <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Lightbox2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css" rel="stylesheet" />
+  
+
 
   <style>
     html { scroll-behavior: smooth; }
@@ -21,6 +26,10 @@
     .image-holder img { transition: transform 0.4s ease; transform-style: preserve-3d; }
     .image-holder:hover { transform: rotateX(4deg) rotateY(4deg) scale(1.03); box-shadow: 0 12px 24px rgba(0,0,0,0.12); }
     .image-holder:hover img { transform: scale(1.05); }
+    #image-lightbox {
+  backdrop-filter: blur(4px);
+}
+
   </style>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
@@ -166,10 +175,10 @@
 
       <!-- Slide 1 -->
       <div class="swiper-slide relative group rounded-xl overflow-hidden shadow-lg">
-        <img src="https://via.placeholder.com/600x400" alt="Residential Project" class="w-full h-auto">
+        <img src="https://raw.githubusercontent.com/rexarsalan/sarcons/main/image/hyderabad-us/1.jpg" class="w-full h-auto">
         <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-white">
           <h3 class="text-xl font-bold">Residential Building – Hyderabad</h3>
-          <p class="text-sm">G+6 Storied | Mr. Umar Shaikh | ₹8 Cr | Under Construction</p>
+          <p class="text-sm">G+6 Storied | Mr. Umar Shaikh | ₹8.00 Cr | Under Construction</p>
         </div>
       </div>
 
@@ -216,11 +225,10 @@
 <div id="project-sidebar" class="fixed top-0 right-0 w-80 h-full bg-white shadow-lg z-[999] transform translate-x-full transition-transform duration-300 overflow-y-auto p-6">
   <button onclick="closeSidebar()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-xl">&times;</button>
   <h3 id="sidebar-title" class="text-xl font-bold mb-2 text-[#4293ff]">Project Title</h3>
-  <p id="sidebar-client" class="text-sm mb-2 text-gray-700">Client: ...</p>
-  <p id="sidebar-status" class="text-sm mb-4 text-gray-600">Status: ...</p>
   <p id="sidebar-details" class="text-sm text-gray-600 leading-relaxed"></p>
   <div id="sidebar-gallery" class="mt-4"></div>
 </div>
+
 
 <!-- CONTACT -->
 <section id="contact" class="py-16 bg-blue-50 fade-in text-center scroll-mt-24">
@@ -258,12 +266,14 @@
   <span id="scroll-icon">↓</span>
 </button>
 
-
-<!-- SCRIPT SECTION -->
+<!-- SCRIPT -->
+<!-- Swiper + Lightbox2 -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox.min.js"></script>
+
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  // Mobile menu toggle
+document.addEventListener("DOMContentLoaded", () => {
+  // Navbar toggle
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileLinks = document.getElementById('mobile-links');
   mobileMenuBtn.addEventListener('click', () => mobileLinks.classList.toggle('hidden'));
@@ -271,19 +281,18 @@ document.addEventListener("DOMContentLoaded", function () {
     link.addEventListener('click', () => mobileLinks.classList.add('hidden'))
   );
 
-  // Fade-in effect
-  const faders = document.querySelectorAll('.fade-in');
-  const appearOnScroll = new IntersectionObserver((entries, obs) => {
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        obs.unobserve(entry.target);
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1 });
-  faders.forEach(fader => appearOnScroll.observe(fader));
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  // Scroll button logic
+  // Scroll-to-top button
   const scrollBtn = document.getElementById("scroll-btn");
   const scrollIcon = document.getElementById("scroll-icon");
   scrollBtn.addEventListener("click", () => {
@@ -294,8 +303,8 @@ document.addEventListener("DOMContentLoaded", function () {
     scrollIcon.textContent = window.scrollY > 100 ? "↑" : "↓";
   });
 
-  // Form validation
-  document.getElementById("contact-form").addEventListener("submit", function (e) {
+  // Contact form check
+  document.getElementById("contact-form").addEventListener("submit", e => {
     const mobile = document.getElementById("mobile").value.trim();
     const email = document.getElementById("email").value.trim();
     if (!mobile && !email) {
@@ -304,7 +313,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Swiper initialization
+  // Swiper init
   new Swiper(".mySwiper", {
     loop: true,
     autoplay: {
@@ -325,7 +334,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Leaflet Map setup
+  // Leaflet map
   const map = L.map('map-container', {
     center: [19.076, 72.8777],
     zoom: 5,
@@ -336,49 +345,111 @@ document.addEventListener("DOMContentLoaded", function () {
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
     noWrap: true,
-    bounds: [[-90, -180], [90, 180]],
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  const projects = [
-    {
-      coords: [19.076, 72.8777],
-      title: 'Toll Plaza Building',
-      short: 'G+2 storied toll plaza building',
-      client: 'Eagle Infra India Ltd.',
-      status: 'Completed',
-      fullDetails: 'Constructed along Mumbai-Goa Highway at Ratnagiri.',
-      folder: 'toll-plaza'
-    },
-    {
-      coords: [17.385, 78.4867],
-      title: 'Hyderabad Residential Project',
-      short: '6-storey residential tower',
-      client: 'Mr. Umar Shaikh',
-      status: 'Under Construction',
-      fullDetails: 'G+6 high-end apartment worth ₹8 crores.',
-      folder: 'hyderabad-residential'
-    }
-  ];
+  // Load project data from CSV
+  const csvUrl = "https://raw.githubusercontent.com/rexarsalan/sarcons/main/projectsdata/projectdatacsv.csv";
+  Papa.parse(csvUrl, {
+    download: true,
+    header: true,
+    complete: function (results) {
+      const projects = results.data.filter(row => row.lat && row.lng);
 
+      projects.forEach(project => {
+        const coords = [parseFloat(project.lat), parseFloat(project.lng)];
+
+        const marker = L.marker(coords).addTo(map);
+
+        const popupContent = `
+          <div style="max-width:250px;">
+            <strong>${project.title}</strong><br/>
+            ${project.fullDetails || ''}<br/>
+            <img src="https://raw.githubusercontent.com/rexarsalan/sarcons/main/image/${project.folder}/1.jpg"
+                alt="${project.title}"
+                style="width:100%; border-radius:6px; margin-top:8px;"
+                onerror="this.style.display='none'" />
+            <div style="margin-top: 6px;">
+              <button class="show-details-btn"
+                style="background-color: #4293ff; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
+                More Details
+              </button>
+            </div>
+          </div>
+        `;
+
+        marker.bindPopup(popupContent);
+
+        marker.on('click', () => {
+          const sidebarOpen = !document.getElementById("project-sidebar").classList.contains("translate-x-full");
+          const mapped = {
+            title: project.title,
+            type: project.type,
+            fullDetails: project.fullDetails,
+            address: project.address,
+            client: project.client,
+            status: project.status,
+            cost: project.cost,
+            folder: project.folder
+          };
+
+          if (sidebarOpen) {
+            openSidebar(mapped);
+          } else {
+            marker.openPopup();
+            setTimeout(() => {
+              const btn = document.querySelector('.show-details-btn');
+              if (btn) {
+                btn.addEventListener('click', () => openSidebar(mapped));
+              }
+            }, 200);
+          }
+        });
+      });
+
+    }
+  });
+
+  // Sidebar panel logic
   function openSidebar(project) {
-    document.getElementById("sidebar-title").innerText = project.title;
-    document.getElementById("sidebar-client").innerText = `Client: ${project.client}`;
-    document.getElementById("sidebar-status").innerText = `Status: ${project.status}`;
-    document.getElementById("sidebar-details").innerText = project.fullDetails;
+    document.getElementById("sidebar-title").innerText = project.title || 'Untitled Project';
+
+    const details = [
+      ['Project Type', project.type],
+      ['Description', project.fullDetails],
+      ['Address', project.address],
+      ['Status', project.status],
+      ['Client', project.client],
+      ['Cost', project.cost]
+    ];
+
+    const detailHTML = details
+      .filter(([_, val]) => val)
+      .map(([label, val]) => `<p class="text-sm mb-1"><strong>${label}:</strong> ${val}</p>`)
+      .join('');
+
+    document.getElementById("sidebar-details").innerHTML = detailHTML;
 
     const gallery = document.getElementById("sidebar-gallery");
     gallery.innerHTML = '';
     const grid = document.createElement('div');
     grid.className = 'grid grid-cols-2 gap-4 mt-4';
 
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 1; i <= 10; i++) {
+      const imageUrl = `https://raw.githubusercontent.com/rexarsalan/sarcons/main/image/${project.folder}/${i}.jpg`;
+      const link = document.createElement('a');
+      link.href = imageUrl;
+      link.setAttribute('data-lightbox', `project-${project.folder}`);
+      link.setAttribute('data-title', `${project.title} - Image ${i}`);
+
       const img = document.createElement('img');
-      img.src = `./projects/${project.folder}/image${i}.jpg`;
+      img.src = imageUrl;
       img.alt = `${project.title} Image ${i}`;
       img.className = 'w-full rounded shadow';
-      img.onerror = () => img.remove();
-      grid.appendChild(img);
+
+      img.onerror = () => link.remove();
+      link.appendChild(img);
+      grid.appendChild(link);
     }
 
     gallery.appendChild(grid);
@@ -389,39 +460,26 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("project-sidebar").style.transform = "translateX(100%)";
   }
 
+  window.openSidebarData = openSidebar;
   window.closeSidebar = closeSidebar;
-  window.openSidebarData = function (projectStr) {
-    const project = typeof projectStr === 'string' ? JSON.parse(projectStr) : projectStr;
-    openSidebar(project);
-  };
 
-  projects.forEach(project => {
-    const popup = `
-      <div style="max-width:250px;">
-        <strong>${project.title}</strong><br/>
-        ${project.short}<br/>
-        <img src="./projects/${project.folder}/image1.jpg" alt="${project.title}" style="width:100%; border-radius:6px; margin-top:8px;" onerror="this.style.display='none'" />
-        <button onclick='window.openSidebarData(${JSON.stringify(project)})'
-          style="margin-top: 6px; background-color: #4293ff; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
-          More Details
-        </button>
-      </div>
-    `;
-    L.marker(project.coords).addTo(map).bindPopup(popup);
-  });
-
-  // ✅ Last Updated Date in Footer
+  // Footer updated date
   const lastUpdated = document.getElementById("last-updated");
   if (lastUpdated) {
-    const today = new Date();
-    lastUpdated.textContent = today.toLocaleDateString('en-IN', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    lastUpdated.textContent = new Date().toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
     });
   }
 });
 </script>
+
+
+
+
+<!-- Lightbox2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox.min.js"></script>
 
 
 </body>
