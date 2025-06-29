@@ -28,7 +28,7 @@
 
 <!-- NAVBAR -->
 <nav class="fixed w-full top-0 left-0 bg-white shadow z-50">
-  <div class="w-full flex justify-between items-center px-6 lg:px-16 py-4 max-w-[1400px] mx-auto">
+  <div class="w-full flex justify-between items-center px-6 lg:px-16 py-4">
     <a href="#"><img src="https://uploads.onecompiler.io/43p797x9z/43p6tp6aq/sarconslogo.png" alt="Sarcons Logo" class="h-10" /></a>
     <div class="space-x-8 text-gray-700 hidden md:flex text-sm lg:text-base">
       <a href="#about" class="hover:text-[#4293ff]">About</a>
@@ -39,13 +39,15 @@
     </div>
     <button id="mobile-menu-btn" class="md:hidden text-gray-700"><i class="fa fa-bars text-2xl"></i></button>
   </div>
-  <div id="mobile-links" class="hidden md:hidden flex-col bg-white border-t p-4 text-center space-y-2">
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#clients">Clients</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </div>
+<div id="mobile-links" class="hidden md:hidden flex flex-col bg-white border-t px-6 py-4 space-y-2 text-left shadow">
+  <a href="#about" class="mobile-nav-link py-2 px-2 hover:bg-blue-100 rounded">About</a>
+  <a href="#services" class="mobile-nav-link py-2 px-2 hover:bg-blue-100 rounded">Services</a>
+  <a href="#clients" class="mobile-nav-link py-2 px-2 hover:bg-blue-100 rounded">Clients</a>
+  <a href="#projects" class="mobile-nav-link py-2 px-2 hover:bg-blue-100 rounded">Projects</a>
+  <a href="#contact" class="mobile-nav-link py-2 px-2 hover:bg-blue-100 rounded">Contact</a>
+</div>
+
+
 </nav>
 
 <!-- HERO -->
@@ -56,7 +58,7 @@
 
 <!-- REST OF THE SECTIONS... -->
 <!-- ABOUT -->
-<section id="about" class="py-16 px-4 max-w-5xl mx-auto fade-in text-justify">
+<section id="about" class="py-16 w-full px-4 lg:px-8 fade-in text-justify scroll-mt-24">
   <h2 class="text-3xl font-bold text-center mb-8">About Us</h2>
   <p class="mb-4">Established in 2009, <strong>Sarcons</strong> is a premier construction contracting firm with a footprint across India. Under the visionary leadership of Mr. Abdul Rahman Shaikh, we have built a reputation for delivering high-quality, cost-effective solutions that stand the test of time.</p>
   <p>From residential and retail buildings to public projects, we bring decades of combined expertise to every project. Our experienced teams ensure safety, reliability, and superior craftsmanship at every stage of construction.</p>
@@ -102,9 +104,9 @@
 </section>
 
 <!-- SERVICES -->
-<section id="services" class="py-16 bg-gray-50 fade-in">
+<section id="services" class="py-16 bg-gray-50 fade-in scroll-mt-24">
   <h2 class="text-3xl font-bold text-center mb-8">Our Services</h2>
-  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4 text-center">
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full px-4 lg:px-8 text-center">
     <div class="bg-white p-4 rounded-xl shadow image-holder">
       <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Residential Building" />
       <h4 class="font-semibold">Residential Buildings</h4>
@@ -122,9 +124,9 @@
 
 
 <!-- CLIENTS -->
-<section id="clients" class="py-16 bg-white fade-in">
+<section id="clients" class="py-16 bg-white fade-in scroll-mt-24">
   <h2 class="text-3xl font-bold text-center mb-8">Key Clients</h2>
-  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 max-w-6xl mx-auto px-4">
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 w-full px-4 lg:px-8">
 
     <!-- Client 1 -->
     <div class="bg-gray-50 p-4 rounded-xl shadow hover:shadow-lg transition group text-center">
@@ -155,7 +157,7 @@
 
 
 <!-- PROJECTS -->
-<section id="projects" class="py-16 px-4 max-w-6xl mx-auto fade-in">
+<section id="projects" class="py-16 w-full px-4 lg:px-8 fade-in scroll-mt-24">
   <h2 class="text-3xl font-bold text-center mb-8">Key Recent Projects</h2>
 
   <!-- Swiper -->
@@ -191,22 +193,23 @@
 
     </div>
 
-    <!-- Navigation -->
-    <button class="swiper-button-prev-custom bg-[#2c3e50] text-white p-2 rounded-full shadow hover:bg-[#34495e] absolute top-1/2 -left-6 transform -translate-y-1/2 z-10">
-  <i class="fas fa-chevron-left"></i>
-</button>
-<button class="swiper-button-next-custom bg-[#2c3e50] text-white p-2 rounded-full shadow hover:bg-[#34495e] absolute top-1/2 -right-6 transform -translate-y-1/2 z-10">
-  <i class="fas fa-chevron-right"></i>
-</button>
+    <!-- ✅ Fixed Navigation -->
+    <div class="swiper-button-prev swiper-button-prev-custom bg-[#2c3e50] text-white p-2 rounded-full shadow hover:bg-[#34495e] absolute top-1/2 -left-6 transform -translate-y-1/2 z-10">
+      <i class="fas fa-chevron-left"></i>
+    </div>
+    <div class="swiper-button-next swiper-button-next-custom bg-[#2c3e50] text-white p-2 rounded-full shadow hover:bg-[#34495e] absolute top-1/2 -right-6 transform -translate-y-1/2 z-10">
+      <i class="fas fa-chevron-right"></i>
+    </div>
 
   </div>
 </section>
 
 
+
 <!-- MAP SECTION -->
 <section id="map" class="py-16 bg-white fade-in text-center relative">
   <h2 class="text-3xl font-bold mb-6">Our Projects</h2>
-  <div id="map-container" class="mx-auto w-full max-w-5xl rounded-xl shadow" style="height: 400px;"></div>
+  <div id="map-container" class="mx-auto w-full w-full px-4 lg:px-8 rounded-xl shadow" style="height: 400px;"></div>
 </section>
 
 <!-- SIDEBAR FOR PROJECT DETAILS -->
@@ -216,9 +219,11 @@
   <p id="sidebar-client" class="text-sm mb-2 text-gray-700">Client: ...</p>
   <p id="sidebar-status" class="text-sm mb-4 text-gray-600">Status: ...</p>
   <p id="sidebar-details" class="text-sm text-gray-600 leading-relaxed"></p>
+  <div id="sidebar-gallery" class="mt-4"></div>
 </div>
+
 <!-- CONTACT -->
-<section id="contact" class="py-16 bg-blue-50 fade-in text-center">
+<section id="contact" class="py-16 bg-blue-50 fade-in text-center scroll-mt-24">
   <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
   <p><i class="fa fa-envelope mr-2"></i> <a href="mailto:sarcons2013@gmail.com" class="text-blue-600 underline">sarcons2013@gmail.com</a></p>
   <p><i class="fa fa-phone mr-2"></i> +91 9867303633</p>
@@ -226,7 +231,7 @@
 
 <!-- CONTACT FORM -->
 <section id="contact" class="py-16 bg-blue-50 fade-in text-center">
-  <form id="contact-form" action="https://formspree.io/f/your-form-id" method="POST" class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow space-y-4">
+  <form id="contact-form" action="https://formspree.io/f/your-form-id" method="POST" class="w-full px-4 lg:px-8 bg-white p-6 rounded-xl shadow space-y-4">
     <input type="text" name="name" placeholder="Your Name*" required class="w-full p-3 border rounded" />
     
     <input type="tel" id="mobile" name="mobile" placeholder="Your Mobile Number" class="w-full p-3 border rounded" />
@@ -244,37 +249,27 @@
 <footer class="bg-gray-900 text-white py-6 text-center fade-in">
   <img src="https://uploads.onecompiler.io/43p797x9z/43p6tp6aq/sarconslogo.png" alt="Sarcons Logo" class="h-12 mx-auto mb-2" />
   <p>&copy; 2025 Sarcons. All rights reserved.</p>
+  <p class="text-sm text-gray-400 mt-2">Last updated: <span id="last-updated"></span></p>
+
 </footer>
-
-
-<!-- MAP SECTION -->
-<section id="map" class="py-16 bg-white fade-in text-center relative">
-  <h2 class="text-3xl font-bold mb-6">Our Projects</h2>
-  <div id="map-container" class="mx-auto w-full max-w-5xl rounded-xl shadow" style="height: 400px;"></div>
-</section>
-
-<!-- SIDEBAR FOR PROJECT DETAILS -->
-<div id="project-sidebar" class="fixed top-0 right-0 w-80 h-full bg-white shadow-lg z-[999] transform translate-x-full transition-transform duration-300 overflow-y-auto p-6">
-  <button onclick="closeSidebar()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-xl">&times;</button>
-  <h3 id="sidebar-title" class="text-xl font-bold mb-2 text-[#4293ff]">Project Title</h3>
-  <p id="sidebar-client" class="text-sm mb-2 text-gray-700">Client: ...</p>
-  <p id="sidebar-status" class="text-sm mb-4 text-gray-600">Status: ...</p>
-  <p id="sidebar-details" class="text-sm text-gray-600 leading-relaxed"></p>
-  <div id="sidebar-gallery" class="mt-4"></div>
-</div>
 
 <!-- BACK TO TOP/DOWN BUTTON -->
 <button id="scroll-btn" class="fixed bottom-4 right-4 bg-[#4293ff] text-white px-3 py-2 rounded-full shadow-lg hover:bg-[#317ad4]">
   <span id="scroll-icon">↓</span>
 </button>
 
+
 <!-- SCRIPT SECTION -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
+document.addEventListener("DOMContentLoaded", function () {
   // Mobile menu toggle
-  document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-    document.getElementById('mobile-links').classList.toggle('hidden');
-  });
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileLinks = document.getElementById('mobile-links');
+  mobileMenuBtn.addEventListener('click', () => mobileLinks.classList.toggle('hidden'));
+  document.querySelectorAll('#mobile-links a').forEach(link =>
+    link.addEventListener('click', () => mobileLinks.classList.add('hidden'))
+  );
 
   // Fade-in effect
   const faders = document.querySelectorAll('.fade-in');
@@ -310,32 +305,38 @@
   });
 
   // Swiper initialization
-  document.addEventListener("DOMContentLoaded", () => {
-    new Swiper(".mySwiper", {
-      loop: true,
-      autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next-custom",
-        prevEl: ".swiper-button-prev-custom",
-      },
-      spaceBetween: 20,
-      grabCursor: true,
-      slidesPerView: 1,
-      breakpoints: {
-        768: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 }
-      }
-    });
+  new Swiper(".mySwiper", {
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next-custom",
+      prevEl: ".swiper-button-prev-custom",
+    },
+    spaceBetween: 20,
+    grabCursor: true,
+    slidesPerView: 1,
+    breakpoints: {
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    }
   });
 
   // Leaflet Map setup
-  const map = L.map('map-container').setView([19.076, 72.8777], 5);
+  const map = L.map('map-container', {
+    center: [19.076, 72.8777],
+    zoom: 5,
+    maxBounds: [[-90, -180], [90, 180]],
+    maxBoundsViscosity: 1.0
+  });
+
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
+    noWrap: true,
+    bounds: [[-90, -180], [90, 180]],
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
@@ -356,7 +357,7 @@
       client: 'Mr. Umar Shaikh',
       status: 'Under Construction',
       fullDetails: 'G+6 high-end apartment worth ₹8 crores.',
-      folder: 'hyderabad-us'
+      folder: 'hyderabad-residential'
     }
   ];
 
@@ -365,10 +366,12 @@
     document.getElementById("sidebar-client").innerText = `Client: ${project.client}`;
     document.getElementById("sidebar-status").innerText = `Status: ${project.status}`;
     document.getElementById("sidebar-details").innerText = project.fullDetails;
+
     const gallery = document.getElementById("sidebar-gallery");
     gallery.innerHTML = '';
     const grid = document.createElement('div');
-    grid.className = 'grid grid-cols-2 gap-4';
+    grid.className = 'grid grid-cols-2 gap-4 mt-4';
+
     for (let i = 1; i <= 6; i++) {
       const img = document.createElement('img');
       img.src = `./projects/${project.folder}/image${i}.jpg`;
@@ -377,6 +380,7 @@
       img.onerror = () => img.remove();
       grid.appendChild(img);
     }
+
     gallery.appendChild(grid);
     document.getElementById("project-sidebar").style.transform = "translateX(0)";
   }
@@ -387,7 +391,7 @@
 
   window.closeSidebar = closeSidebar;
   window.openSidebarData = function (projectStr) {
-    const project = JSON.parse(projectStr);
+    const project = typeof projectStr === 'string' ? JSON.parse(projectStr) : projectStr;
     openSidebar(project);
   };
 
@@ -397,14 +401,28 @@
         <strong>${project.title}</strong><br/>
         ${project.short}<br/>
         <img src="./projects/${project.folder}/image1.jpg" alt="${project.title}" style="width:100%; border-radius:6px; margin-top:8px;" onerror="this.style.display='none'" />
-        <button onclick='window.openSidebarData(${JSON.stringify(JSON.stringify(project))})'
-          style="margin-top: 6px; background-color: #4293ff; color: white; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
+        <button onclick='window.openSidebarData(${JSON.stringify(project)})'
+          style="margin-top: 6px; background-color: #4293ff; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
           More Details
         </button>
-      </div>`;
+      </div>
+    `;
     L.marker(project.coords).addTo(map).bindPopup(popup);
   });
+
+  // ✅ Last Updated Date in Footer
+  const lastUpdated = document.getElementById("last-updated");
+  if (lastUpdated) {
+    const today = new Date();
+    lastUpdated.textContent = today.toLocaleDateString('en-IN', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  }
+});
 </script>
+
 
 </body>
 </html>
