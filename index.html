@@ -4,247 +4,397 @@
   <meta charset="UTF-8" />
   <title>Sarcons Engineers & Contractors</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
-  <!-- Leaflet CSS -->
   <link href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <!-- Swiper.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
   <style>
     html { scroll-behavior: smooth; }
-    body { font-family: Arial, sans-serif; color: #333; background: #fff; }
-    h2, h3, h4 { color: #4293ff; }
-    a:hover { color: #4293ff; }
-    .fade-in { opacity: 0; transform: translateY(1rem); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    .image-holder { overflow: hidden; border-radius: 0.75rem; transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s; }
-    .image-holder img { transition: transform 0.3s ease; }
-    .image-holder:hover { transform: scale(1.05); border: 2px solid #ff3131; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
-    .image-holder:hover img { transform: scale(1.1); }
+    body { font-family: 'Inter', sans-serif; color: #333; }
+    h1, h2, h3, h4 { color: #4293ff; }
+    a:hover { color: #ff3131; }
+    .fade-in { opacity: 0; transform: translateY(30px) scale(0.98); transition: opacity 1s ease-out, transform 1s ease-out; }
+    .fade-in.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .image-holder { overflow: hidden; border-radius: 0.75rem; perspective: 800px; transition: transform 0.4s ease, box-shadow 0.4s ease; }
+    .image-holder img { transition: transform 0.4s ease; transform-style: preserve-3d; }
+    .image-holder:hover { transform: rotateX(4deg) rotateY(4deg) scale(1.03); box-shadow: 0 12px 24px rgba(0,0,0,0.12); }
+    .image-holder:hover img { transform: scale(1.05); }
   </style>
-  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body class="bg-white text-gray-800">
 
-  <!-- NAVBAR -->
-  <nav class="fixed w-full top-0 left-0 bg-white shadow z-50">
-    <div class="max-w-6xl mx-auto flex justify-between items-center px-4 py-3">
-      <img src="./cropped_cons.png" alt="Sarcons Logo" class="h-10" />
-      <div class="space-x-6 text-gray-700 hidden md:flex">
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#clients">Clients</a>
-        <a href="#projects">Projects</a>
-        <a href="#map">Locations</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <button id="mobile-menu-btn" class="md:hidden text-gray-700 focus:outline-none">
-        <i class="fa fa-bars text-2xl"></i>
-      </button>
-    </div>
-    <div id="mobile-links" class="hidden flex-col bg-white border-t p-4 space-y-2 text-center md:hidden">
+<!-- NAVBAR -->
+<nav class="fixed w-full top-0 left-0 bg-white shadow z-50">
+  <div class="max-w-6xl mx-auto flex justify-between items-center px-4 py-3">
+    <img src="./cropped_cons.png" alt="Sarcons Logo" class="h-10" />
+    <div class="space-x-6 text-gray-700 hidden md:flex">
       <a href="#about">About</a>
       <a href="#services">Services</a>
       <a href="#clients">Clients</a>
       <a href="#projects">Projects</a>
-      <a href="#map">Locations</a>
       <a href="#contact">Contact</a>
     </div>
-  </nav>
+    <button id="mobile-menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+      <i class="fa fa-bars text-2xl"></i>
+    </button>
+  </div>
+  <div id="mobile-links" class="hidden md:hidden flex-col bg-white border-t p-4 text-center space-y-2">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#clients">Clients</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-24 bg-white">
-    <img src="./cropped_cons.png" alt="Sarcons Logo" class="h-24 mb-4 fade-in" />
-    <h1 class="text-5xl font-bold mb-2 fade-in text-[#4293ff]">Sarcons Engineers & Contractors</h1>
-    <p class="text-xl fade-in text-gray-700">Building Trust. Delivering Excellence.</p>
-  </section>
+<!-- HERO -->
+<section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-32 bg-gradient-to-b from-white to-blue-50">
+  <img src="./cropped_cons.png" alt="Sarcons Logo" class="h-24 mb-4 fade-in" />
+  <h1 class="text-5xl font-bold mb-2 fade-in text-[#4293ff]">Sarcons</h1>
+  <p class="text-xl fade-in text-gray-700">Building Trust. Delivering Excellence.</p>
+</section>
 
-  <!-- ABOUT -->
-  <section id="about" class="py-16 px-4 max-w-5xl mx-auto text-center space-y-8 fade-in">
-    <h2 class="text-3xl font-bold">About Us</h2>
-    <p>
-      Established in 2009, <strong>Sarcons Engineers &amp; Contractors</strong> is a premier, multidisciplinary construction contracting firm with a strong footprint across India. Under the visionary leadership of Mr. Abdul Rahman Shaikh, we have built a reputation for delivering high-quality, cost-effective solutions that stand the test of time.
-    </p>
-    <p>
-      From residential and commercial buildings to large-scale public and industrial projects, we bring decades of combined expertise to every project. Our experienced teams leverage modern technology and best-in-class practices to ensure safety, sustainability, and superior craftsmanship at every stage of construction.
-    </p>
-    <!-- VISION & MISSION -->
-    <div class="grid md:grid-cols-2 gap-8 mt-8 text-left">
+<!-- ABOUT -->
+<section id="about" class="py-16 px-4 max-w-5xl mx-auto fade-in text-justify">
+  <h2 class="text-3xl font-bold text-center mb-8">About Us</h2>
+  <p class="mb-4">Established in 2009, <strong>Sarcons</strong> is a premier construction contracting firm with a footprint across India. Under the visionary leadership of Mr. Abdul Rahman Shaikh, we have built a reputation for delivering high-quality, cost-effective solutions that stand the test of time.</p>
+  <p>From residential and retail buildings to public projects, we bring decades of combined expertise to every project. Our experienced teams ensure safety, reliability, and superior craftsmanship at every stage of construction.</p>
+
+  <!-- VISION & MISSION -->
+  <div class="grid md:grid-cols-2 gap-8 mt-8 text-left">
+    <div class="bg-white p-6 rounded-xl shadow image-holder">
+      <h3 class="text-xl font-semibold mb-2">Vision</h3>
+      <p>To be a trusted leader in construction, delivering excellence, sustainability, and lasting value to every client and community we serve.</p>
+    </div>
+    <div class="bg-white p-6 rounded-xl shadow image-holder">
+      <h3 class="text-xl font-semibold mb-2">Mission</h3>
+      <p>To provide innovative, reliable, and efficient contracting services while upholding the highest standards of safety, quality, and integrity on every project.</p>
+    </div>
+  </div>
+
+  <!-- CORE VALUES -->
+  <div class="mt-12">
+    <h3 class="text-2xl font-bold mb-6 text-center">Core Values</h3>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
       <div class="bg-white p-6 rounded-xl shadow image-holder">
-        <h3 class="text-xl font-semibold mb-2">Vision</h3>
-        <p>To be a trusted leader in construction, delivering excellence, sustainability, and lasting value to every client and community we serve.</p>
-      </div>
-      <div class="bg-white p-6 rounded-xl shadow image-holder">
-        <h3 class="text-xl font-semibold mb-2">Mission</h3>
-        <p>To provide innovative, reliable, and efficient contracting services while upholding the highest standards of safety, quality, and integrity on every project.</p>
-      </div>
-    </div>
-    <!-- CORE VALUES -->
-    <div class="mt-12">
-      <h3 class="text-2xl font-bold mb-6 text-center">Core Values</h3>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 text-center">
-        <div class="bg-white p-6 rounded-xl shadow image-holder">
-          <i class="fa fa-check-circle text-4xl text-[#4293ff] mb-4"></i>
-          <h4 class="font-semibold mb-2">Quality</h4>
-          <p>Commitment to delivering excellence in every detail.</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow image-holder">
-          <i class="fa fa-handshake text-4xl text-[#4293ff] mb-4"></i>
-          <h4 class="font-semibold mb-2">Integrity</h4>
-          <p>Transparent communication and ethical business practices.</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow image-holder">
-          <i class="fa fa-clock text-4xl text-[#4293ff] mb-4"></i>
-          <h4 class="font-semibold mb-2">Reliability</h4>
-          <p>Completing projects on-time and within budget.</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow image-holder">
-          <i class="fa fa-hard-hat text-4xl text-[#4293ff] mb-4"></i>
-          <h4 class="font-semibold mb-2">Safety</h4>
-          <p>Prioritizing the well-being of our team and everyone on site.</p>
-        </div>
-        <div class="bg-white p-6 rounded-xl shadow image-holder">
-          <i class="fa fa-leaf text-4xl text-[#4293ff] mb-4"></i>
-          <h4 class="font-semibold mb-2">Sustainability</h4>
-          <p>Minimizing our environmental footprint and building responsibly for future generations.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services" class="py-16 bg-gray-50 fade-in">
-    <h2 class="text-3xl font-bold text-center mb-8">Our Services</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4 text-center">
-      <div class="bg-white p-4 rounded-xl shadow image-holder">
-        <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Residential Building" />
-        <h4 class="font-semibold">Residential Buildings</h4>
-      </div>
-      <div class="bg-white p-4 rounded-xl shadow image-holder">
-        <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Commercial Building" />
-        <h4 class="font-semibold">Commercial Buildings</h4>
-      </div>
-      <div class="bg-white p-4 rounded-xl shadow image-holder">
-        <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Public Buildings" />
-        <h4 class="font-semibold">Public Buildings</h4>
-      </div>
-      <div class="bg-white p-4 rounded-xl shadow image-holder">
-        <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Miscellaneous Structures" />
-        <h4 class="font-semibold">Miscellaneous Civil Works</h4>
-      </div>
-    </div>
-  </section>
-
-  <!-- CLIENTS -->
-  <section id="clients" class="py-16 bg-white fade-in">
-    <h2 class="text-3xl font-bold text-center mb-8">Key Clients</h2>
-    <div class="flex flex-wrap justify-center gap-8 text-lg">
-      <span class="bg-gray-50 px-4 py-2 rounded-xl shadow">Eagle Infra India Ltd.</span>
-      <span class="bg-gray-50 px-4 py-2 rounded-xl shadow">Inderdeep Construction Co. Ltd.</span>
-      <span class="bg-gray-50 px-4 py-2 rounded-xl shadow">Aeroeagle Automobiles Ltd.</span>
-      <span class="bg-gray-50 px-4 py-2 rounded-xl shadow">Avenue Supermarts Ltd.</span>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects" class="py-16 px-4 max-w-6xl mx-auto fade-in">
-    <h2 class="text-3xl font-bold text-center mb-8">Key Recent Projects</h2>
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="bg-white p-6 rounded-xl shadow image-holder">
-        <img src="https://via.placeholder.com/600x400" class="w-full rounded mb-4" alt="Residential Project" />
-        <h3 class="text-xl font-semibold">Residential Building – Hyderabad</h3>
-        <p>G+6 Storied | Mr. Umar Shaikh | Approx ₹8 Crores | Under Construction</p>
+        <i class="fa fa-check-circle text-4xl text-blue-500 mb-4"></i>
+        <h4 class="font-semibold text-blue-400 mb-2">Quality</h4>
+        <p>Commitment to delivering excellence in every detail.</p>
       </div>
       <div class="bg-white p-6 rounded-xl shadow image-holder">
-        <img src="https://via.placeholder.com/600x400" class="w-full rounded mb-4" alt="Toll Plaza Building" />
-        <h3 class="text-xl font-semibold">Toll Plaza Building – Ratnagiri</h3>
-        <p>G+2 Storied | Eagle Infra India Ltd. | Approx ₹44.50 Lakhs | Completed</p>
+        <i class="fa fa-handshake text-4xl text-red-500 mb-4"></i>
+        <h4 class="font-semibold text-red-400 mb-2">Integrity</h4>
+        <p>Transparent communication and ethical business practices.</p>
       </div>
       <div class="bg-white p-6 rounded-xl shadow image-holder">
-        <img src="https://via.placeholder.com/600x400" class="w-full rounded mb-4" alt="Police Station Building" />
-        <h3 class="text-xl font-semibold">Police Station Building – Ratnagiri</h3>
-        <p>G+2 Storied | Eagle Infra Ltd. | Approx ₹1.29 Crores | Under Construction</p>
+        <i class="fa fa-clock text-4xl text-purple-500 mb-4"></i>
+        <h4 class="font-semibold text-purple-400 mb-2">Reliability</h4>
+        <p>Completing projects on-time and within budget.</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow image-holder">
+        <i class="fa fa-hard-hat text-4xl text-green-500 mb-4"></i>
+        <h4 class="font-semibold text-green-400 mb-2">Safety</h4>
+        <p>Prioritizing the well-being of our team and everyone on site.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+<!-- SERVICES -->
+<section id="services" class="py-16 bg-gray-50 fade-in">
+  <h2 class="text-3xl font-bold text-center mb-8">Our Services</h2>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto px-4 text-center">
+    <div class="bg-white p-4 rounded-xl shadow image-holder">
+      <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Residential Building" />
+      <h4 class="font-semibold">Residential Buildings</h4>
+    </div>
+    <div class="bg-white p-4 rounded-xl shadow image-holder">
+      <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Commercial Building" />
+      <h4 class="font-semibold">Commercial Buildings</h4>
+    </div>
+    <div class="bg-white p-4 rounded-xl shadow image-holder">
+      <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Public Buildings" />
+      <h4 class="font-semibold">Public Buildings</h4>
+    </div>
+    <div class="bg-white p-4 rounded-xl shadow image-holder">
+      <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Miscellaneous Structures" />
+      <h4 class="font-semibold">Miscellaneous Civil Works</h4>
+    </div>
+  </div>
+</section>
 
-  <!-- MAP -->
-  <section id="map" class="py-16 bg-white fade-in text-center">
-    <h2 class="text-3xl font-bold mb-6">Our Project Locations</h2>
-    <div id="map-container" class="mx-auto w-full max-w-5xl" style="height:400px;"></div>
-  </section>
+<!-- CLIENTS -->
+<!-- CLIENTS -->
+<!-- CLIENTS -->
+<section id="clients" class="py-16 bg-white fade-in">
+  <h2 class="text-3xl font-bold text-center mb-8">Key Clients</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 max-w-6xl mx-auto px-4">
 
-  <!-- CONTACT -->
-  <section id="contact" class="py-16 bg-blue-50 fade-in text-center">
-    <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
-    <p><i class="fa fa-user mr-2"></i> Mr. Abdul Rahman Shaikh</p>
-    <p><i class="fa fa-envelope mr-2"></i> <a href="mailto:sarcons2013@gmail.com" class="text-blue-600 underline">sarcons2013@gmail.com</a></p>
-    <p><i class="fa fa-phone mr-2"></i> +91 9867303633</p>
-  </section>
+    <!-- Client 1 -->
+    <div class="bg-gray-50 p-4 rounded-xl shadow hover:shadow-lg transition group text-center">
+      <img src="https://via.placeholder.com/120x60?text=Eagle+Infra" alt="Eagle Infra India Ltd." class="h-16 mx-auto mb-2 grayscale group-hover:grayscale-0 transition" />
+      <p class="text-sm font-semibold text-gray-700 group-hover:text-[#4293ff]">Eagle Infra India Ltd.</p>
+    </div>
 
-  <!-- FOOTER -->
-  <footer class="bg-gray-900 text-white py-6 text-center fade-in">
-    <img src="./cropped_cons.png" alt="Sarcons Logo" class="h-12 mx-auto mb-2" />
-    <p>&copy; 2025 Sarcons Engineers & Contractors. All rights reserved.</p>
-  </footer>
+    <!-- Client 2 -->
+    <div class="bg-gray-50 p-4 rounded-xl shadow hover:shadow-lg transition group text-center">
+      <img src="https://via.placeholder.com/120x60?text=Inderdeep" alt="Inderdeep Construction Co. Ltd." class="h-16 mx-auto mb-2 grayscale group-hover:grayscale-0 transition" />
+      <p class="text-sm font-semibold text-gray-700 group-hover:text-[#4293ff]">Inderdeep Construction Co. Ltd.</p>
+    </div>
 
-  <!-- SCRIPTS -->
-   <script>
-    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-      document.getElementById('mobile-links').classList.toggle('hidden');
+    <!-- Client 3 -->
+    <div class="bg-gray-50 p-4 rounded-xl shadow hover:shadow-lg transition group text-center">
+      <img src="https://via.placeholder.com/120x60?text=Aeroeagle" alt="Aeroeagle Automobiles Ltd." class="h-16 mx-auto mb-2 grayscale group-hover:grayscale-0 transition" />
+      <p class="text-sm font-semibold text-gray-700 group-hover:text-[#4293ff]">Aeroeagle Automobiles Ltd.</p>
+    </div>
+
+    <!-- Client 4 -->
+    <div class="bg-gray-50 p-4 rounded-xl shadow hover:shadow-lg transition group text-center">
+      <img src="https://via.placeholder.com/120x60?text=DMart" alt="Avenue Supermarts Ltd." class="h-16 mx-auto mb-2 grayscale group-hover:grayscale-0 transition" />
+      <p class="text-sm font-semibold text-gray-700 group-hover:text-[#4293ff]">Avenue Supermarts Ltd. (DMart)</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- PROJECTS -->
+<section id="projects" class="py-16 px-4 max-w-6xl mx-auto fade-in">
+  <h2 class="text-3xl font-bold text-center mb-8">Key Recent Projects</h2>
+
+  <!-- Swiper -->
+  <div class="swiper mySwiper relative">
+    <div class="swiper-wrapper">
+
+      <!-- Slide 1 -->
+      <div class="swiper-slide relative group rounded-xl overflow-hidden shadow-lg">
+        <img src="https://via.placeholder.com/600x400" alt="Residential Project" class="w-full h-auto">
+        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-white">
+          <h3 class="text-xl font-bold">Residential Building – Hyderabad</h3>
+          <p class="text-sm">G+6 Storied | Mr. Umar Shaikh | ₹8 Cr | Under Construction</p>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="swiper-slide relative group rounded-xl overflow-hidden shadow-lg">
+        <img src="https://via.placeholder.com/600x400" alt="Toll Plaza Building" class="w-full h-auto">
+        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-white">
+          <h3 class="text-xl font-bold">Toll Plaza Building – Ratnagiri</h3>
+          <p class="text-sm">G+2 | Eagle Infra India Ltd. | ₹44.5L | Completed</p>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="swiper-slide relative group rounded-xl overflow-hidden shadow-lg">
+        <img src="https://via.placeholder.com/600x400" alt="Police Station Building" class="w-full h-auto">
+        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-white">
+          <h3 class="text-xl font-bold">Police Station Building – Ratnagiri</h3>
+          <p class="text-sm">G+2 | Eagle Infra Ltd. | ₹1.29 Cr | Under Construction</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Navigation -->
+    <div class="swiper-button-next text-[#4293ff]"></div>
+    <div class="swiper-button-prev text-[#4293ff]"></div>
+  </div>
+</section>
+
+
+<!-- MAP SECTION -->
+<section id="map" class="py-16 bg-white fade-in text-center relative">
+  <h2 class="text-3xl font-bold mb-6">Our Projects</h2>
+  <div id="map-container" class="mx-auto w-full max-w-5xl rounded-xl shadow" style="height: 400px;"></div>
+</section>
+
+<!-- SIDEBAR FOR PROJECT DETAILS -->
+<div id="project-sidebar" class="fixed top-0 right-0 w-80 h-full bg-white shadow-lg z-[999] transform translate-x-full transition-transform duration-300 overflow-y-auto p-6">
+  <button onclick="closeSidebar()" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-xl">&times;</button>
+  <h3 id="sidebar-title" class="text-xl font-bold mb-2 text-[#4293ff]">Project Title</h3>
+  <p id="sidebar-client" class="text-sm mb-2 text-gray-700">Client: ...</p>
+  <p id="sidebar-status" class="text-sm mb-4 text-gray-600">Status: ...</p>
+  <p id="sidebar-details" class="text-sm text-gray-600 leading-relaxed"></p>
+</div>
+<!-- CONTACT -->
+<section id="contact" class="py-16 bg-blue-50 fade-in text-center">
+  <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
+  <p><i class="fa fa-envelope mr-2"></i> <a href="mailto:sarcons2013@gmail.com" class="text-blue-600 underline">sarcons2013@gmail.com</a></p>
+  <p><i class="fa fa-phone mr-2"></i> +91 9867303633</p>
+</section>
+
+<!-- CONTACT FORM -->
+<section id="contact" class="py-16 bg-blue-50 fade-in text-center">
+  <form id="contact-form" action="https://formspree.io/f/your-form-id" method="POST" class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow space-y-4">
+    <input type="text" name="name" placeholder="Your Name*" required class="w-full p-3 border rounded" />
+    
+    <input type="tel" id="mobile" name="mobile" placeholder="Your Mobile Number" class="w-full p-3 border rounded" />
+    
+    <input type="email" id="email" name="email" placeholder="Your Email" class="w-full p-3 border rounded" />
+    
+    <textarea name="message" placeholder="Your Message" rows="5" class="w-full p-3 border rounded"></textarea>
+    
+    <button type="submit" class="bg-[#4293ff] text-white px-6 py-2 rounded hover:bg-[#317ad4] transition">Send Message</button>
+  </form>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-white py-6 text-center fade-in">
+  <img src="./cropped_cons.png" alt="Sarcons Logo" class="h-12 mx-auto mb-2" />
+  <p>&copy; 2025 Sarcons. All rights reserved.</p>
+</footer>
+
+
+<!-- BACK TO TOP/DOWN BUTTON -->
+<button id="scroll-btn" class="fixed bottom-4 right-4 bg-[#4293ff] text-white px-3 py-2 rounded-full shadow-lg hover:bg-[#317ad4]">
+  <span id="scroll-icon">↓</span>
+</button>
+
+<!-- SCRIPT SECTION -->
+<script>
+  // Mobile menu toggle
+  document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+    document.getElementById('mobile-links').classList.toggle('hidden');
+  });
+
+  // Fade-in animation on scroll
+  const faders = document.querySelectorAll('.fade-in');
+  const appearOnScroll = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
     });
+  }, { threshold: 0.1 });
+  faders.forEach(fader => appearOnScroll.observe(fader));
 
-    const faders = document.querySelectorAll('.fade-in');
-    const appearOnScroll = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    faders.forEach(fader => appearOnScroll.observe(fader));
+  // Toggle scroll direction
+  const scrollBtn = document.getElementById("scroll-btn");
+  const scrollIcon = document.getElementById("scroll-icon");
 
-    // Leaflet Map
-    const map = L.map('map-container').setView([19.076, 72.8777], 5);
-    L.tileLayer(
-      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }
-    ).addTo(map);
+  scrollBtn.addEventListener("click", () => {
+    if (window.scrollY > 100) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    }
+  });
 
-    // === PROJECT MARKERS ===
-    L.marker([19.0538, 73.10303]).addTo(map).bindPopup('<strong>RIDDHI SIDDHI APARTMENTS</strong><br>STILT + 4 STORIED RESIDENTIAL BUILDING<br>Client: M/S. SHREE SIDDHIVINAYAK ENTERPRISES<br>COMPLETED');
-    L.marker([18.9907, 73.117]).addTo(map).bindPopup('<strong>RIDDHI SIDDHI COMPLEX</strong><br>STILT + 4 STORIED - 9 WINGS RESIDENTIAL BUILDINGS<br>Client: M/S. SHREE SIDDHIVINAYAK ENTERPRISES<br>COMPLETED');
-    L.marker([18.9907, 73.117]).addTo(map).bindPopup('<strong>GLOBAL PARADISE</strong><br>STILT +7 RESIDENTIAL BUILDING<br>Client: M/S. GLOBAL ENTERPRISES<br>COMPLETED');
-    L.marker([19, 73.1]).addTo(map).bindPopup('<strong>VINAYAK COMPLEX</strong><br>GROUND + 2 STORIED RESIDENTIAL BUILDING<br>Client: M/S. GLOBAL ENTERPRISES<br>COMPLETED');
-    L.marker([16.9938, 73.3143]).addTo(map).bindPopup('<strong>RESIDENTIAL BUILDING</strong><br>GROUND + 4 STORIED RESIDENTIAL BUILDING<br>Client: M/S. SHREE SIDDHIVINAYAK ENTERPRISES<br>COMPLETED');
-    L.marker([19.27, 73.065353]).addTo(map).bindPopup('<strong>UNDERGROUND WATER TANK</strong><br>UNDER GROUND WATER TANK / PUMP ROOM & OTHER MISCELLANEOUS WORKS AT D-MART.<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
-    L.marker([19.053846, 73.10303]).addTo(map).bindPopup('<strong>SAI RAJ PARADISE</strong><br>STILT + 7 STORIED - 2 WINGS RESIDENTIAL BUILDINGS<br>Client: M/S SAI RAJ ENTERPRISES<br>COMPLETED');
-    L.marker([26.8467, 80.9462]).addTo(map).bindPopup('<strong>B-GREEN TERRACE</strong><br>GROUND + 3 STORIED RESIDENTIAL BUILDING<br>Client: M/S. B - GREEN PVT. LTD.<br>COMPLETED');
-    L.marker([19.4698, 72.8228]).addTo(map).bindPopup('<strong>BUNGALOW</strong><br>G+1 STORIED BUNGLOW<br>Client: MR. SANDEEP MEHTA, KANDIVALI (EAST), MUMBAI, MAHARAHSTRA.<br>COMPLETED');
-    L.marker([18.9, 73.2]).addTo(map).bindPopup('<strong>RESIDENTIAL BUILDING</strong><br>SHREE SWAMI SAMARTH DEVELOPERS, GROUND + 1 STORIED RESIDENTIAL BUILDING<br>Client: M/S KHALIDKAR & KADAM, KARJAT, DIST. RAIGAD, MAHARASHTRA.<br>COMPLETED');
-    L.marker([18.9766, 73.2906]).addTo(map).bindPopup('<strong>SUNRISE RESIDENCY</strong><br>GROUND + 3 STORIED, 30 RESIDENTIAL BUILDINGS<br>Client: M/S. RAJNIR ENTERPRISES PVT. LTD.<br>COMPLETED');
-    L.marker([22.7196, 75.858]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
-    L.marker([22.336, 73.2135]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
-    L.marker([19.033, 73.0289]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
-    L.marker([23.2599, 77.4126]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
-    L.marker([12.834, 77.6972]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
-    L.marker([12.8714, 74.8559]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
-    L.marker([22.3072, 73.1812]).addTo(map).bindPopup('<strong>DMART STORE</strong><br>DMART STORE (COMMERCIAL)<br>Client: AVENUE SUPERMARTS LTD. (DMART)<br>COMPLETED');
-    L.marker([17.385, 78.4867]).addTo(map).bindPopup('<strong>RESIDENTIAL BUILDING</strong><br>GROUND + 6 UPPER STORIED RESIDENTIAL BUILDING<br>Client: MR. SALIM SHAIKH, HYDERABAD, TELANGANA.<br>COMPLETED');
-    L.marker([17.53, 73.512]).addTo(map).bindPopup('<strong>TOLL PLAZA BUILDING</strong><br>G+2 UPPER STORIED TOLL PLAZA BUILDING<br>Client: EAGLE INFRA INDIA LTD.<br>COMPLETED');
-    L.marker([17.53, 73.512]).addTo(map).bindPopup('<strong>MISSCELLANEOUS STRUCTURES</strong><br>TOILET BLOCKS, MEDICAL & TRAFFIC AID POSTS, CHUTE DRAINS ETC. AT CHIPLUN, ALONG MUMBAI GOA HIGHWAY.<br>Client: EAGLE INFRA INDIA LTD.<br>COMPLETED');
-    L.marker([16.9885, 73.4661]).addTo(map).bindPopup('<strong>FOUNDATIONS</strong><br>FOUNDATIONS FOR COMPANY BASE CAMP<br>Client: INDERDEEP CONSTRUCTION COMPANY LTD.<br>COMPLETED');
-    L.marker([16.9885, 73.4665]).addTo(map).bindPopup('<strong>TOILET BLOCK</strong><br>TOILET BLOCK FOR COMPANY BASE CAMP<br>Client: INDERDEEP CONSTRUCTION COMPANY LTD.<br>COMPLETED');
-    L.marker([19.0368, 73.0158]).addTo(map).bindPopup('<strong>ELECTRIC BUS CHARGING STATION</strong><br>ELECTRIC BUS CHARGING STATION FOR 4 BUSES<br>Client: INDERDEEP CONSTRUCTION COMPANY LTD.<br>COMPLETED');
-    L.marker([19.139, 73.0619]).addTo(map).bindPopup('<strong>ELECTRIC BUS CHARGING STATION</strong><br>ELECTRIC BUS CHARGING STATIONS FOR 6 BUSES<br>Client: INDERDEEP CONSTRUCTION COMPANY LTD.<br>COMPLETED');
-    L.marker([17.385, 78.4867]).addTo(map).bindPopup('<strong>RESIDENTIAL BUILDING</strong><br>GROUND + 6 STORIED RESIDENTIAL BUILDING<br>Client: MR. UMAR SHAIKH, HYDERABAD, TELANGANA, INDIA.<br>UNDER CONSTRUCTION');
-    L.marker([17.53, 73.512]).addTo(map).bindPopup('<strong>BUS STOPS</strong><br>MULTIPLE BUS STOPS AT CHIPLUN, ALONG MUMBAI GOA HIGHWAY<br>Client: EAGLE INFRA INDIA LTD.<br>UNDER CONSTRUCTION');
-    L.marker([17.53, 73.512]).addTo(map).bindPopup('<strong>BUS STOPS</strong><br>MULTIPLE BUS STOPS AT RATNAGIRI, ALONG MUMBAI GOA HIGHWAY<br>Client: INDERDEEP CONSTRUCTION COMPANY LTD.<br>UNDER CONSTRUCTION');
-    L.marker([17.4042, 73.5379]).addTo(map).bindPopup('<strong>POLICE STATION BUILDING</strong><br>G+1 UPPER STORIED POLICE STATION BUILDING<br>Client: EAGLE INFRA INDIA LTD.<br>IN-HAND');
-    L.marker([17.4042, 73.5379]).addTo(map).bindPopup('<strong>TALATHI OFFICE BUILDING</strong><br>SINGLE STORIED TALATHI OFFICE BUILDING<br>Client: EAGLE INFRA INDIA LTD.<br>IN-HAND');
-    L.marker([18.98, 73.116]).addTo(map).bindPopup('<strong>ELECTRIC BUS CHARGING STATION</strong><br>ELECTRIC BUS CHARGING STATIONS FOR APPROX. 40 BUSES<br>Client: INDERDEEP CONSTRUCTION COMPANY LTD.<br>IN-HAND');
-  </script>
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 100) {
+      scrollIcon.textContent = "↑";
+    } else {
+      scrollIcon.textContent = "↓";
+    }
+  });
+
+  // Require either mobile or email
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    const mobile = document.getElementById("mobile").value.trim();
+    const email = document.getElementById("email").value.trim();
+    if (!mobile && !email) {
+      e.preventDefault();
+      alert("Please provide at least Mobile Number or Email.");
+    }
+  });
+</script>
+<script>
+  // Initialize Leaflet Map
+  const map = L.map('map-container').setView([19.076, 72.8777], 5);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Project Data
+  const projects = [
+    {
+      coords: [19.076, 72.8777],
+      title: 'Toll Plaza Building',
+      short: 'G+2 storied toll plaza building',
+      client: 'Eagle Infra India Ltd.',
+      status: 'Completed',
+      fullDetails: 'G+2 storied toll plaza building constructed along Mumbai-Goa Highway at Ratnagiri.'
+    },
+    {
+      coords: [17.385, 78.4867],
+      title: 'Hyderabad Residential Project',
+      short: '6-storey residential tower',
+      client: 'Mr. Umar Shaikh',
+      status: 'Under Construction',
+      fullDetails: 'G+6 storied high-end residential apartment in Hyderabad worth approx ₹8 crores.'
+    }
+  ];
+
+  // Function to open sidebar with full details
+  function openSidebar(project) {
+    document.getElementById("sidebar-title").innerText = project.title;
+    document.getElementById("sidebar-client").innerText = `Client: ${project.client}`;
+    document.getElementById("sidebar-status").innerText = `Status: ${project.status}`;
+    document.getElementById("sidebar-details").innerText = project.fullDetails;
+    document.getElementById("project-sidebar").style.transform = "translateX(0)";
+  }
+
+  // Close sidebar function
+  function closeSidebar() {
+    document.getElementById("project-sidebar").style.transform = "translateX(100%)";
+  }
+
+  // Expose closeSidebar to global scope
+  window.closeSidebar = closeSidebar;
+
+  // Add markers with popup and "More Details" button
+  projects.forEach(project => {
+    const popupContent = `
+      <strong>${project.title}</strong><br/>
+      ${project.short}<br/>
+      <button onclick='window.openSidebarData(${JSON.stringify(JSON.stringify(project) )})'
+        style="margin-top: 6px; background-color: #4293ff; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
+        More Details
+      </button>
+    `;
+    L.marker(project.coords).addTo(map)
+      .bindPopup(popupContent);
+  });
+
+  // Helper function to parse JSON from inline string and open sidebar
+  window.openSidebarData = function(projectStr) {
+    const project = JSON.parse(projectStr);
+    openSidebar(project);
+  }
+</script>
+//swiper.JS
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.mySwiper', {
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    grabCursor: true,
+    spaceBetween: 20,
+    slidesPerView: 1,
+    breakpoints: {
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 }
+    }
+  });
+</script>
+
+
+</script>
+
+
 </body>
 </html>
