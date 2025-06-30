@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+  <meta charset="UTF-8" />
+  <title>All Projects - Sarcons</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  
+</head>
+
+
+<!-- NAVBAR WITH CENTERED LOGO -->
+<nav class="w-full bg-white shadow p-4 flex items-center justify-center">
+  <a href="index.html">
+    <img src="https://rexarsalan.github.io/sarcons/image/logo/sarcons/sarconslogo.png" alt="Sarcons Logo" class="h-12">
+  </a>
+</nav>
+
+
+<body class="bg-white text-gray-800 font-sans p-4">
+
+  <h1 class="text-3xl font-bold text-center text-[#4293ff] mb-8">All Projects</h1>
+
+  <div class="overflow-x-auto">
+    <table id="projects-table" class="min-w-full bg-white border border-gray-200 shadow-md rounded-lg overflow-hidden">
+      <thead class="bg-[#4293ff] text-white">
+        <tr>
+          <th class="px-4 py-2 text-left">Name of Project</th>
+          <th class="px-4 py-2 text-left">Type</th>
+          <th class="px-4 py-2 text-left">Client</th>
+          <th class="px-4 py-2 text-left">Status</th>
+          <th class="px-4 py-2 text-left">Location</th>
+          <th class="px-4 py-2 text-left">Cost</th>
+          
+        </tr>
+      </thead>
+      <tbody class="text-sm text-gray-700"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const csvUrl = "https://raw.githubusercontent.com/rexarsalan/sarcons/main/projectsdata/projectdatacsv.csv";
+
+    Papa.parse(csvUrl, {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const rows = results.data.filter(row => row.title);
+        const tbody = document.querySelector("#projects-table tbody");
+
+        rows.forEach(project => {
+          const tr = document.createElement("tr");
+
+          tr.innerHTML = `
+            <td class="border px-4 py-2">${project.title || ''}</td>
+            <td class="border px-4 py-2">${project.type || ''}</td>
+            <td class="border px-4 py-2">${project.client || ''}</td>
+            <td class="border px-4 py-2">${project.status || ''}</td>
+            <td class="border px-4 py-2">${project.address || ''}</td>
+            <td class="border px-4 py-2">${project.cost || ''}</td>
+          `;
+
+          tbody.appendChild(tr);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
