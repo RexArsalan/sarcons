@@ -14,23 +14,82 @@
   <link href="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/css/lightbox.min.css" rel="stylesheet" />
   
 
+<!-- STYLE -->
+<style>
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; color: #333; }
 
-  <style>
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; color: #333; }
-    h1, h2, h3, h4 { color: #4293ff; }
-    a:hover { color: #ff3131; }
-    .fade-in { opacity: 0; transform: translateY(30px) scale(0.98); transition: opacity 1s ease-out, transform 1s ease-out; }
-    .fade-in.visible { opacity: 1; transform: translateY(0) scale(1); }
-    .image-holder { overflow: hidden; border-radius: 0.75rem; perspective: 800px; transition: transform 0.4s ease, box-shadow 0.4s ease; }
-    .image-holder img { transition: transform 0.4s ease; transform-style: preserve-3d; }
-    .image-holder:hover { transform: rotateX(4deg) rotateY(4deg) scale(1.03); box-shadow: 0 12px 24px rgba(0,0,0,0.12); }
-    .image-holder:hover img { transform: scale(1.05); }
-    #image-lightbox {
-  backdrop-filter: blur(4px);
+  h1, h2, h3, h4 { color: #4293ff; }
+  a:hover { color: #ff3131; }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .image-holder {
+    overflow: hidden;
+    border-radius: 0.75rem;
+    perspective: 800px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .image-holder img {
+    transition: transform 0.4s ease;
+    transform-style: preserve-3d;
+  }
+
+  .image-holder:hover {
+    transform: rotateX(4deg) rotateY(4deg) scale(1.03);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+  }
+
+  .image-holder:hover img {
+    transform: scale(1.05);
+  }
+
+  #image-lightbox {
+    backdrop-filter: blur(4px);
+  }
+
+.project-slide {
+  position: relative;
+  height: 500px; /* Increase height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 1rem;
 }
 
-  </style>
+.project-slide .bg-blur {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(20px);
+  z-index: 0;
+  transform: scale(1.1);
+}
+
+.project-slide img {
+  position: relative;
+  max-height: 90%;
+  max-width: 90%;
+  z-index: 1;
+  object-fit: contain;
+}
+
+
+</style>
+
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body class="bg-white text-gray-800">
@@ -60,14 +119,14 @@
 </nav>
 
 <!-- HERO -->
-<section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-32 bg-gradient-to-b from-white to-blue-50">
+<section class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-32 bg-gradient-to-b from-white to-blue-100">
   <img src="https://uploads.onecompiler.io/43p797x9z/43p6tp6aq/head.png" alt="Sarcons Logo" class="h-48 mb-4 fade-in" />
   <p class="text-xl fade-in text-gray-700">Building Trust. Delivering Excellence.</p>
 </section>
 
 <!-- REST OF THE SECTIONS... -->
 <!-- ABOUT -->
-<section id="about" class="py-16 w-full px-4 lg:px-8 fade-in text-justify scroll-mt-24">
+  <section id="about" class="fade-in py-16 w-full px-4 lg:px-8 text-justify scroll-mt-24">
   <h2 class="text-3xl font-bold text-center mb-8">About Us</h2>
   <p class="mb-4">Established in 2009, <strong>Sarcons</strong> is a premier construction contracting firm with a footprint across India. Under the visionary leadership of Mr. Abdul Rahman Shaikh, we have built a reputation for delivering high-quality, cost-effective solutions that stand the test of time.</p>
   <p>From residential and retail buildings to public projects, we bring decades of combined expertise to every project. Our experienced teams ensure safety, reliability, and superior craftsmanship at every stage of construction.</p>
@@ -113,51 +172,98 @@
 </section>
 
 <!-- SERVICES -->
-<section id="services" class="py-16 bg-gray-50 fade-in scroll-mt-24">
+<!-- SERVICES -->
+<section id="services" class="fade-in py-16 bg-gray-50 scroll-mt-24">
   <h2 class="text-3xl font-bold text-center mb-8">Our Services</h2>
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full px-4 lg:px-8 text-center">
-    <div class="bg-white p-4 rounded-xl shadow image-holder">
-      <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Residential Building" />
-      <h4 class="font-semibold">Residential Buildings</h4>
+
+    <!-- Service Card -->
+    <div class="rounded-xl shadow overflow-hidden bg-white">
+      <div class="relative h-[280px] overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center blur-md scale-110 z-0"
+             style="background-image: url('https://rexarsalan.github.io/sarcons/image/maharashtra/mmr/bhivpuri/2.jpg');">
+        </div>
+        <img src="https://rexarsalan.github.io/sarcons/image/maharashtra/mmr/bhivpuri/2.jpg"
+             class="relative z-10 w-full h-full object-cover" alt="Residential Buildings" />
+      </div>
+      <div class="h-20 flex items-center justify-center bg-white px-4">
+        <h4 class="font-semibold text-gray-800">Residential Buildings</h4>
+      </div>
     </div>
-    <div class="bg-white p-4 rounded-xl shadow image-holder">
-      <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Public Buildings" />
-      <h4 class="font-semibold">Public Buildings</h4>
+
+    <!-- Repeat for each service -->
+    <div class="rounded-xl shadow overflow-hidden bg-white">
+      <div class="relative h-[280px] overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center blur-md scale-110 z-0"
+             style="background-image: url('https://rexarsalan.github.io/sarcons/image/eagle/chiplun/tollplaza/1.jpg');">
+        </div>
+        <img src="https://rexarsalan.github.io/sarcons/image/eagle/chiplun/tollplaza/1.jpg"
+             class="relative z-10 w-full h-full object-cover" alt="Public Buildings" />
+      </div>
+      <div class="h-20 flex items-center justify-center bg-white px-4">
+        <h4 class="font-semibold text-gray-800">Public Buildings</h4>
+      </div>
     </div>
-    <div class="bg-white p-4 rounded-xl shadow image-holder">
-      <img src="https://via.placeholder.com/300x200" class="w-full rounded mb-2" alt="Miscellaneous Structures" />
-      <h4 class="font-semibold">Miscellaneous Civil Works</h4>
+
+    <div class="rounded-xl shadow overflow-hidden bg-white">
+      <div class="relative h-[280px] overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center blur-md scale-110 z-0"
+             style="background-image: url('https://rexarsalan.github.io/sarcons/image/eagle/chiplun/busstops/1.jpg');">
+        </div>
+        <img src="https://rexarsalan.github.io/sarcons/image/eagle/chiplun/busstops/1.jpg"
+             class="relative z-10 w-full h-full object-cover" alt="Miscellaneous Civil Works" />
+      </div>
+      <div class="h-20 flex items-center justify-center bg-white px-4">
+        <h4 class="font-semibold text-gray-800">Miscellaneous Civil Works</h4>
+      </div>
     </div>
+
+    <div class="rounded-xl shadow overflow-hidden bg-white">
+      <div class="relative h-[280px] overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center blur-md scale-110 z-0"
+             style="background-image: url('https://rexarsalan.github.io/sarcons/image/maharashtra/mmr/ev/turbhe/1.jpg');">
+        </div>
+        <img src="https://rexarsalan.github.io/sarcons/image/maharashtra/mmr/ev/turbhe/1.jpg"
+             class="relative z-10 w-full h-full object-cover" alt="EV Charging Stations" />
+      </div>
+      <div class="h-20 flex items-center justify-center bg-white px-4">
+        <h4 class="font-semibold text-gray-800">Electric Vehicle Charging Stations</h4>
+      </div>
+    </div>
+
   </div>
 </section>
 
 
+
+
+
 <!-- CLIENTS -->
-<section id="clients" class="py-16 bg-white fade-in scroll-mt-24">
+<section id="clients" class="fade-in py-16 bg-white scroll-mt-24">
   <h2 class="text-3xl font-bold text-center mb-8">Key Clients</h2>
   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 w-full px-4 lg:px-8">
 
     <!-- Client 1 -->
     <div class="bg-gray-50 p-4 rounded-xl shadow hover:shadow-lg transition group text-center">
-      <img src="https://via.placeholder.com/120x60?text=Eagle+Infra" alt="Eagle Infra India Ltd." class="h-16 mx-auto mb-2 grayscale group-hover:grayscale-0 transition" />
+      <img src="https://rexarsalan.github.io/sarcons/image/logo/eiillogo.png" alt="Eagle Infra India Ltd." class="h-16 mx-auto mb-2 group-hover:grayscale-0 transition" />
       <p class="text-sm font-semibold text-gray-700 group-hover:text-[#4293ff]">Eagle Infra India Ltd.</p>
     </div>
 
     <!-- Client 2 -->
     <div class="bg-gray-50 p-4 rounded-xl shadow hover:shadow-lg transition group text-center">
-      <img src="https://via.placeholder.com/120x60?text=Inderdeep" alt="Inderdeep Construction Co. Ltd." class="h-16 mx-auto mb-2 grayscale group-hover:grayscale-0 transition" />
+      <img src="https://rexarsalan.github.io/sarcons/image/logo/idcclogo.png" alt="Inderdeep Construction Co. Ltd." class="h-16 mx-auto mb-2 group-hover:grayscale-0 transition" />
       <p class="text-sm font-semibold text-gray-700 group-hover:text-[#4293ff]">Inderdeep Infra India Ltd.</p>
     </div>
 
     <!-- Client 3 -->
     <div class="bg-gray-50 p-4 rounded-xl shadow hover:shadow-lg transition group text-center">
-      <img src="https://via.placeholder.com/120x60?text=Aeroeagle" alt="Aeroeagle Automobiles Ltd." class="h-16 mx-auto mb-2 grayscale group-hover:grayscale-0 transition" />
+      <img src="https://via.placeholder.com/120x60?text=Aeroeagle" alt="Aeroeagle Automobiles Ltd." class="h-16 mx-auto mb-2 group-hover:grayscale-0 transition" />
       <p class="text-sm font-semibold text-gray-700 group-hover:text-[#4293ff]">Aeroeagle Automobiles Ltd.</p>
     </div>
 
     <!-- Client 4 -->
     <div class="bg-gray-50 p-4 rounded-xl shadow hover:shadow-lg transition group text-center">
-      <img src="https://via.placeholder.com/120x60?text=DMart" alt="Avenue Supermarts Ltd." class="h-16 mx-auto mb-2 grayscale group-hover:grayscale-0 transition" />
+      <img src="https://rexarsalan.github.io/sarcons/image/logo/asllogo.png" alt="Avenue Supermarts Ltd." class="h-16 mx-auto mb-2 group-hover:grayscale-0 transition" />
       <p class="text-sm font-semibold text-gray-700 group-hover:text-[#4293ff]">Avenue Supermarts Ltd. (DMart)</p>
     </div>
 
@@ -166,60 +272,64 @@
 
 
 <!-- PROJECTS -->
-<section id="projects" class="py-16 w-full px-4 lg:px-8 fade-in scroll-mt-24">
+<section id="projects" class="fade-in py-16 w-full scroll-mt-24">
   <h2 class="text-3xl font-bold text-center mb-8">Key Recent Projects</h2>
 
-  <!-- Swiper -->
-  <div class="swiper mySwiper relative">
+  <!-- Swiper Carousel -->
+  <div class="swiper mySwiper w-full">
     <div class="swiper-wrapper">
 
       <!-- Slide 1 -->
-      <div class="swiper-slide relative group rounded-xl overflow-hidden shadow-lg">
-        <img src="https://raw.githubusercontent.com/rexarsalan/sarcons/main/image/hyderabad-us/1.jpg" class="w-full h-auto">
-        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-white">
-          <h3 class="text-xl font-bold">Residential Building – Hyderabad</h3>
-          <p class="text-sm">G+6 Storied | Mr. Umar Shaikh | ₹8.00 Cr | Under Construction</p>
+      <div class="swiper-slide project-slide group relative overflow-hidden">
+        <div class="bg-blur" style="background-image: url('https://rexarsalan.github.io/sarcons/image/hyderabad-us/1.jpg');"></div>
+        <img src="https://rexarsalan.github.io/sarcons/image/hyderabad-us/1.jpg" alt="Residential Project" />
+        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-white z-10">
+          <h3 class="text-xl font-bold text-white">Residential Building – Hyderabad</h3>
+          <p class="text-sm">G+6 Storied | Mr. Umar Shaikh | Rs. 8.00 Cr | Under Construction</p>
         </div>
       </div>
 
       <!-- Slide 2 -->
-      <div class="swiper-slide relative group rounded-xl overflow-hidden shadow-lg">
-        <img src="https://via.placeholder.com/600x400" alt="Toll Plaza Building" class="w-full h-auto">
-        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-white">
-          <h3 class="text-xl font-bold">Toll Plaza Building – Ratnagiri</h3>
-          <p class="text-sm">G+2 | Eagle Infra India Ltd. | ₹44.5L | Completed</p>
+      <div class="swiper-slide project-slide group relative overflow-hidden">
+        <div class="bg-blur" style="background-image: url('https://rexarsalan.github.io/sarcons/image/eagle/chiplun/tollplaza/1.jpg');"></div>
+        <img src="https://rexarsalan.github.io/sarcons/image/eagle/chiplun/tollplaza/1.jpg" alt="Toll Plaza Building" />
+        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-white z-10">
+          <h3 class="text-xl font-bold text-white">Toll Plaza Building – Chiplun</h3>
+          <p class="text-sm">G+2 storied | Eagle Infra India Ltd. | Rs. 37.64 Lakh | Completed</p>
         </div>
       </div>
 
       <!-- Slide 3 -->
-      <div class="swiper-slide relative group rounded-xl overflow-hidden shadow-lg">
-        <img src="https://via.placeholder.com/600x400" alt="Police Station Building" class="w-full h-auto">
-        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-white">
-          <h3 class="text-xl font-bold">Police Station Building – Ratnagiri</h3>
-          <p class="text-sm">G+2 | Eagle Infra Ltd. | ₹1.29 Cr | Under Construction</p>
+      <div class="swiper-slide project-slide group relative overflow-hidden">
+        <div class="bg-blur" style="background-image: url('https://rexarsalan.github.io/sarcons/image/eagle/chiplun/ps/1.jpg');"></div>
+        <img src="https://rexarsalan.github.io/sarcons/image/eagle/chiplun/ps/1.jpg" alt="Police Station Building" />
+        <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition duration-300 flex flex-col justify-end p-4 text-white z-10">
+          <h3 class="text-xl font-bold text-white">Police Station Building – Sawarde, Chiplun</h3>
+          <p class="text-sm">G+2 storied | Eagle Infra India Ltd. | Rs. 1.29 Cr | Under Construction</p>
         </div>
       </div>
 
     </div>
-
-    <!-- ✅ Fixed Navigation -->
-    <div class="swiper-button-prev swiper-button-prev-custom bg-[#2c3e50] text-white p-2 rounded-full shadow hover:bg-[#34495e] absolute top-1/2 -left-6 transform -translate-y-1/2 z-10">
-      <i class="fas fa-chevron-left"></i>
-    </div>
-    <div class="swiper-button-next swiper-button-next-custom bg-[#2c3e50] text-white p-2 rounded-full shadow hover:bg-[#34495e] absolute top-1/2 -right-6 transform -translate-y-1/2 z-10">
-      <i class="fas fa-chevron-right"></i>
-    </div>
-
   </div>
 </section>
 
 
 
+
+
 <!-- MAP SECTION -->
-<section id="map" class="py-16 bg-white fade-in text-center relative">
+<section id="map" class="fade-in py-16 bg-white text-center relative">
   <h2 class="text-3xl font-bold mb-6">Our Projects</h2>
-  <div id="map-container" class="mx-auto w-full w-full px-4 lg:px-8 rounded-xl shadow" style="height: 400px;"></div>
+  <div id="map-container" class="mx-auto w-full px-4 lg:px-8 rounded-xl shadow" style="height: 400px;"></div>
+
+  <!-- All Projects Button -->
+  <div class="mt-8">
+    <a href="projects.html" class="inline-block bg-[#4293ff] text-white px-6 py-3 rounded-lg shadow hover:bg-[#317ad4] transition">
+      View All Projects
+    </a>
+  </div>
 </section>
+
 
 <!-- SIDEBAR FOR PROJECT DETAILS -->
 <div id="project-sidebar" class="fixed top-0 right-0 w-80 h-full bg-white shadow-lg z-[999] transform translate-x-full transition-transform duration-300 overflow-y-auto p-6">
@@ -228,17 +338,19 @@
   <p id="sidebar-details" class="text-sm text-gray-600 leading-relaxed"></p>
   <div id="sidebar-gallery" class="mt-4"></div>
 </div>
+<div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-20 z-[998] hidden"></div>
 
 
 <!-- CONTACT -->
-<section id="contact" class="py-16 bg-blue-50 fade-in text-center scroll-mt-24">
+<section id="contact" class="fade-in py-16 bg-blue-50 text-center scroll-mt-24">
   <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
   <p><i class="fa fa-envelope mr-2"></i> <a href="mailto:sarcons2013@gmail.com" class="text-blue-600 underline">sarcons2013@gmail.com</a></p>
   <p><i class="fa fa-phone mr-2"></i> +91 9867303633</p>
 </section>
 
+
 <!-- CONTACT FORM -->
-<section id="contact" class="py-16 bg-blue-50 fade-in text-center">
+<section class="fade-in py-16 bg-blue-50 text-center">
   <form id="contact-form" action="https://formspree.io/f/your-form-id" method="POST" class="w-full px-4 lg:px-8 bg-white p-6 rounded-xl shadow space-y-4">
     <input type="text" name="name" placeholder="Your Name*" required class="w-full p-3 border rounded" />
     
@@ -267,13 +379,13 @@
 </button>
 
 <!-- SCRIPT -->
-<!-- Swiper + Lightbox2 -->
+<!-- SCRIPT -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lightbox2@2.11.4/dist/js/lightbox.min.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // Navbar toggle
+  // Toggle mobile menu
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileLinks = document.getElementById('mobile-links');
   mobileMenuBtn.addEventListener('click', () => mobileLinks.classList.toggle('hidden'));
@@ -314,25 +426,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Swiper init
-  new Swiper(".mySwiper", {
-    loop: true,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-      pauseOnMouseEnter: true,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next-custom",
-      prevEl: ".swiper-button-prev-custom",
-    },
-    spaceBetween: 20,
-    grabCursor: true,
-    slidesPerView: 1,
-    breakpoints: {
-      768: { slidesPerView: 2 },
-      1024: { slidesPerView: 3 }
-    }
-  });
+new Swiper(".mySwiper", {
+  loop: true,
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true
+  },
+  spaceBetween: 0,
+  grabCursor: true,
+  slidesPerView: 1
+});
+
+
 
   // Leaflet map
   const map = L.map('map-container', {
@@ -348,30 +454,28 @@ document.addEventListener("DOMContentLoaded", () => {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
-  // Load project data from CSV
   const csvUrl = "https://raw.githubusercontent.com/rexarsalan/sarcons/main/projectsdata/projectdatacsv.csv";
+
   Papa.parse(csvUrl, {
     download: true,
     header: true,
     complete: function (results) {
       const projects = results.data.filter(row => row.lat && row.lng);
-
       projects.forEach(project => {
         const coords = [parseFloat(project.lat), parseFloat(project.lng)];
-
         const marker = L.marker(coords).addTo(map);
 
         const popupContent = `
-          <div style="max-width:250px;">
-            <strong>${project.title}</strong><br/>
-            ${project.fullDetails || ''}<br/>
+          <div style="max-width:250px; display: flex; gap: 10px; align-items: center;">
             <img src="https://raw.githubusercontent.com/rexarsalan/sarcons/main/image/${project.folder}/1.jpg"
                 alt="${project.title}"
-                style="width:100%; border-radius:6px; margin-top:8px;"
+                style="width:70px; height:auto; border-radius:6px;"
                 onerror="this.style.display='none'" />
-            <div style="margin-top: 6px;">
+            <div>
+              <strong>${project.title}</strong><br/>
+              <small>${project.fullDetails || ''}</small><br/>
               <button class="show-details-btn"
-                style="background-color: #4293ff; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
+                style="margin-top: 4px; background-color: #4293ff; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">
                 More Details
               </button>
             </div>
@@ -381,7 +485,6 @@ document.addEventListener("DOMContentLoaded", () => {
         marker.bindPopup(popupContent);
 
         marker.on('click', () => {
-          const sidebarOpen = !document.getElementById("project-sidebar").classList.contains("translate-x-full");
           const mapped = {
             title: project.title,
             type: project.type,
@@ -393,25 +496,28 @@ document.addEventListener("DOMContentLoaded", () => {
             folder: project.folder
           };
 
-          if (sidebarOpen) {
-            openSidebar(mapped);
-          } else {
-            marker.openPopup();
-            setTimeout(() => {
-              const btn = document.querySelector('.show-details-btn');
-              if (btn) {
-                btn.addEventListener('click', () => openSidebar(mapped));
-              }
-            }, 200);
-          }
+          setTimeout(() => {
+            const btn = document.querySelector('.show-details-btn');
+            if (btn) {
+              btn.addEventListener('click', () => openSidebar(mapped));
+            }
+          }, 200);
         });
       });
-
     }
   });
 
-  // Sidebar panel logic
+  // Sidebar logic
+  let justOpened = false;
+
+  function resetJustOpened() {
+    setTimeout(() => { justOpened = false; }, 300);
+  }
+
   function openSidebar(project) {
+    justOpened = true;
+    resetJustOpened();
+
     document.getElementById("sidebar-title").innerText = project.title || 'Untitled Project';
 
     const details = [
@@ -423,12 +529,10 @@ document.addEventListener("DOMContentLoaded", () => {
       ['Cost', project.cost]
     ];
 
-    const detailHTML = details
+    document.getElementById("sidebar-details").innerHTML = details
       .filter(([_, val]) => val)
       .map(([label, val]) => `<p class="text-sm mb-1"><strong>${label}:</strong> ${val}</p>`)
       .join('');
-
-    document.getElementById("sidebar-details").innerHTML = detailHTML;
 
     const gallery = document.getElementById("sidebar-gallery");
     gallery.innerHTML = '';
@@ -446,24 +550,40 @@ document.addEventListener("DOMContentLoaded", () => {
       img.src = imageUrl;
       img.alt = `${project.title} Image ${i}`;
       img.className = 'w-full rounded shadow';
-
       img.onerror = () => link.remove();
+
       link.appendChild(img);
       grid.appendChild(link);
     }
 
     gallery.appendChild(grid);
     document.getElementById("project-sidebar").style.transform = "translateX(0)";
+    document.getElementById("sidebar-overlay").classList.remove("hidden");
   }
 
   function closeSidebar() {
     document.getElementById("project-sidebar").style.transform = "translateX(100%)";
+    document.getElementById("sidebar-overlay").classList.add("hidden");
   }
 
+  document.getElementById("sidebar-overlay").addEventListener("click", closeSidebar);
   window.openSidebarData = openSidebar;
   window.closeSidebar = closeSidebar;
 
-  // Footer updated date
+  // Close on outside click
+  document.addEventListener("click", function (e) {
+    const sidebar = document.getElementById("project-sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+    const isOpen = !sidebar.classList.contains("translate-x-full");
+    const isInsideSidebar = sidebar.contains(e.target);
+    const isInsideOverlay = overlay.contains(e.target);
+
+    if (isOpen && !justOpened && !isInsideSidebar && !isInsideOverlay) {
+      closeSidebar();
+    }
+  });
+
+  // Last updated
   const lastUpdated = document.getElementById("last-updated");
   if (lastUpdated) {
     lastUpdated.textContent = new Date().toLocaleDateString("en-IN", {
